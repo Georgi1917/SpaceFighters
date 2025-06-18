@@ -1,5 +1,6 @@
 #pragma once
 #include "include/raylib.h"
+#include "Projectile.h"
 
 
 class Player {
@@ -9,9 +10,14 @@ class Player {
         float health;
         int score;
         float damage;
+        float speed;
+        float projectileSpeed;
 
-        void Shoot();
+        Projectile Shoot();
         void Move(float delta);
+
+    private:
+        void CheckOutOfBounds(char axis, Vector2 &dir);
 
 
 };

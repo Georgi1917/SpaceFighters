@@ -1,42 +1,9 @@
 #include "include/raylib.h"
-#include <iostream>
+#include "Player.h"
+#include "Projectile.h"
+#include <vector>
 
 #define PLAYER_SPEED 300.0f
-
-void CheckOutOfBounds(char axis, Rectangle &playerRect, Vector2 dir) {
-
-    if (axis == 'x') {
-
-        if (dir.x > 0 && (playerRect.x + playerRect.width) >= GetScreenWidth())
-            playerRect.x = GetScreenWidth() - playerRect.width;
-        else if (dir.x < 0 && (playerRect.x < 0))
-            playerRect.x = 0;
-
-    }
-    else {
-
-        if (dir.y > 0 && (playerRect.y + playerRect.height) >= GetScreenHeight())
-            playerRect.y = GetScreenHeight() - playerRect.height;
-        else if (dir.y < 0 && (playerRect.y < 0))
-            playerRect.y = 0;
-
-    }
-
-}
-
-void UpdatePlayerPos(Rectangle &playerRect, float delta) {
-
-    Vector2 dir = { 0 };
-
-    dir.x = (int)IsKeyDown(KEY_RIGHT) - (int)IsKeyDown(KEY_LEFT);
-    dir.y = (int)IsKeyDown(KEY_DOWN) - (int)IsKeyDown(KEY_UP);
-
-    playerRect.x += dir.x * PLAYER_SPEED * delta;
-    CheckOutOfBounds('x', playerRect, dir);
-    playerRect.y += dir.y * PLAYER_SPEED * delta;
-    CheckOutOfBounds('y', playerRect, dir);
-
-}
 
 int main() {
 
@@ -44,6 +11,14 @@ int main() {
     int screenHeight = 900;
 
     Rectangle playerRect = {300, 700, 40, 40};
+    Player player = { 0 };
+    player.rect = playerRect;
+    player.damage = 0;
+    player.health = 0;
+    player.score = 0;
+    player.speed = PLAYER_SPEED;
+
+    std::vector<Projectile> projectiles;
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
 
@@ -54,10 +29,23 @@ int main() {
         BeginDrawing();
 
         float deltaTime = GetFrameTime();
+        player.Move(deltaTime);
+        
+        if (IsKeyDown(KEY_Z)) {
 
-        UpdatePlayerPos(playerRect, deltaTime);
+            Projectile proj = player.Shoot();
+            projectiles.push_back(proj);
 
-        DrawRectangleRec(playerRect, GREEN);
+        }
+
+        DrawRectangleRec(player.rect, GREEN);
+
+        for (Projectile &proj : projectiles) {
+
+            proj.rect.y += proj.yDirection * proj.speed * deltaTime;
+            DrawRectangleRec(proj.rect, RED);
+
+        }
 
         ClearBackground(LIGHTGRAY);
 
