@@ -12,6 +12,7 @@ class Player {
         float damage;
         float speed;
         float projectileSpeed;
+        float timerForShooting;
 
         Projectile Shoot();
         void Move(float delta);

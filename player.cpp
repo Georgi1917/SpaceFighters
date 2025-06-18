@@ -45,7 +45,7 @@ Projectile Player::Shoot() {
     projRect.x = (this->rect.x + this->rect.width / 2) - projRect.width / 2;
     projRect.y = this->rect.y - this->rect.height / 2; 
 
-    Projectile proj = { 0 };
+    Projectile proj;
     proj.rect = projRect;
     proj.yDirection = -1;
     proj.speed = 800.0f;
