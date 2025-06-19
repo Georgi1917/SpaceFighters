@@ -41,7 +41,7 @@ int main() {
             player.timerForShooting = 0;
 
         }
-        else if (IsKeyDown(KEY_Z) && player.timerForShooting < 3) player.timerForShooting += deltaTime;
+        else if (IsKeyDown(KEY_Z) && player.timerForShooting < 0.1) player.timerForShooting += deltaTime;
 
         DrawRectangleRec(player.rect, GREEN);
 

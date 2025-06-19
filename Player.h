@@ -11,7 +11,6 @@ class Player {
         int score;
         float damage;
         float speed;
-        float projectileSpeed;
         float timerForShooting;
 
         Projectile Shoot();
