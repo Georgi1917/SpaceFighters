@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../include/raylib.h"
+#include "../Projectile.h"
 
 class Enemy {
 
@@ -8,19 +9,13 @@ class Enemy {
 
         Rectangle rect;
         Texture2D sprite;
+        Vector2 velocity;
         int health;
         int damage;
         float speed;
 
-        void virtual Update(float deltaTime, Vector2 playerPos) = 0;
+        Projectile virtual Shoot(float delta, Vector2 playerPos) = 0;
         void virtual TakeDamage(int amount) = 0;
-
-    private:
-
-        void virtual UpdateMovement(float deltaTime) = 0;
-        void virtual UpdateShooting(float deltaTime, Vector2 playerPos) = 0;
-
-        Vector2 pos;
-        Vector2 velocity;
+        void virtual Update(float delta) = 0;
 
 };

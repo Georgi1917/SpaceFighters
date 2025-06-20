@@ -9,7 +9,7 @@ class Projectile {
         int id;
         Rectangle rect;
         float speed;
-        int yDirection;
+        Vector2 direction;
 
     bool operator==(const Projectile &other) const;
     Projectile();

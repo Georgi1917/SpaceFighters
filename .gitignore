@@ -2,3 +2,4 @@ main.o
 Player.o
 spacefighters.exe
 Projectile.o
+enemies/DiveBomber.o

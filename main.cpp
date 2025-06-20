@@ -1,9 +1,12 @@
 #include "include/raylib.h"
 #include "Player.h"
 #include "Projectile.h"
+#include "enemies/DiveBomber.h"
+#include "enemies/Enemy.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <memory>
 
 #define PLAYER_SPEED 300.0f
 
@@ -22,6 +25,11 @@ int main() {
     player.speed = PLAYER_SPEED;
 
     std::vector<Projectile> projectiles;
+    std::vector<std::unique_ptr<Enemy>> enemies;
+
+    enemies.push_back(std::make_unique<DiveBomber>(
+        1, 1, 100.0f, Vector2{300, 300}, Vector2{200, -10}
+    ));
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
 
@@ -45,9 +53,17 @@ int main() {
 
         DrawRectangleRec(player.rect, GREEN);
 
+        for (auto& e : enemies) {
+
+            e->Update(deltaTime);
+            DrawRectangleRec(e->rect, RED);
+
+        }
+
         for (Projectile &proj : projectiles) {
 
-            proj.rect.y += proj.yDirection * proj.speed * deltaTime;
+            proj.rect.y += proj.direction.y * proj.speed * deltaTime;
+            proj.rect.x += proj.direction.x * proj.speed * deltaTime;
 
             if (proj.rect.y < 0) projectiles.erase(std::remove(projectiles.begin(), projectiles.end(), proj), projectiles.end());
 
