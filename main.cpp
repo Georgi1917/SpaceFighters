@@ -28,7 +28,7 @@ int main() {
     std::vector<std::unique_ptr<Enemy>> enemies;
 
     enemies.push_back(std::make_unique<DiveBomber>(
-        1, 1, 100.0f, Vector2{300, 300}, Vector2{200, -10}
+        Vector2{300, 500}, Vector2{310, -10}
     ));
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");

@@ -7,8 +7,9 @@ class DiveBomber : public Enemy {
     public:
         Vector2 finalPos;
         Vector2 spawnPoints;
+        bool hasReachedFinalPos;
 
-        DiveBomber(int hp, int dmg, float sp, Vector2 fp, Vector2 swp);
+        DiveBomber(Vector2 fp, Vector2 swp);
         Projectile Shoot(float delta, Vector2 playerPos) override;
         void TakeDamage(int amount) override;
         void Update(float delta) override;

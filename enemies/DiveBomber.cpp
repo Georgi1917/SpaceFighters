@@ -3,15 +3,16 @@
 #include <cmath>
 #include <iostream>
 
-DiveBomber::DiveBomber(int hp, int dmg, float sp, Vector2 fp, Vector2 swp) {
+DiveBomber::DiveBomber(Vector2 fp, Vector2 swp) {
 
-    health = hp;
-    damage = dmg;
-    speed = sp;
+    health = 1;
+    damage = 1;
+    speed = 80.0f;
     finalPos = fp;
     spawnPoints = swp;
 
-    rect = {spawnPoints.x, spawnPoints.y, 10.0f, 10.0f};
+    hasReachedFinalPos = false;
+    rect = {spawnPoints.x, spawnPoints.y, 20.0f, 20.0f};
 
 }
 
@@ -57,19 +58,27 @@ void DiveBomber::TakeDamage(int amount) {
 
 void DiveBomber::Update(float delta) {
 
-    Vector2 direction = Normalize({this->finalPos.x - this->rect.x, this->finalPos.y - this->rect.y});
+    Vector2 direction = Normalize({this->finalPos.x - this->spawnPoints.x, this->finalPos.y - this->spawnPoints.y});
 
-    if (this->rect.x != finalPos.x && this->rect.y != finalPos.y) {
+    float tolerance = 1.0f;
 
-        std::cout << "NO" << "\n";
+    if (fabs(this->rect.x - this->finalPos.x) < tolerance &&
+        fabs(this->rect.y - this->finalPos.y) < tolerance) {
+
+        hasReachedFinalPos = true;
+
+    }
+
+    if (!hasReachedFinalPos) {
+
         this->rect.x += direction.x * speed * delta;
         this->rect.y += direction.y * speed * delta;
 
     }
-    else if (this->rect.x == finalPos.x || this->rect.y == finalPos.y) {
 
-        std::cout << "YES" << "\n";
-        this->rect.x -= direction.x * speed * delta;
+    if (hasReachedFinalPos) {
+
+        this->rect.x += direction.x * speed * delta;
         this->rect.y -= direction.y * speed * delta;
 
     }
