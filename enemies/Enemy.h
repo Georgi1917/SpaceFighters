@@ -13,6 +13,7 @@ class Enemy {
         int health;
         int damage;
         float speed;
+        float shootDelayTimer;
 
         Projectile virtual Shoot(float delta, Vector2 playerPos) = 0;
         void virtual TakeDamage(int amount) = 0;

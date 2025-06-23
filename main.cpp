@@ -10,10 +10,19 @@
 
 #define PLAYER_SPEED 300.0f
 
+int generateRandomNumber() {
+
+    srand((unsigned) time(NULL));
+
+    return ((rand() % 10) - 5);
+
+}
+
 int main() {
 
     int screenWidth = 650;
     int screenHeight = 900;
+    bool hasLost = false;
 
     Rectangle playerRect = {300, 700, 40, 40};
     Player player = { 0 };
@@ -28,14 +37,23 @@ int main() {
     std::vector<std::unique_ptr<Enemy>> enemies;
 
     enemies.push_back(std::make_unique<DiveBomber>(
-        Vector2{300, 500}, Vector2{310, -10}
+        Vector2{300, 500}, Vector2{500, -10}
+    ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{500, 600}, Vector2{400, -10}
+    ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{100, 600}, Vector2{300, -10}
+    ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{450, 500}, Vector2{700, -10}
     ));
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
 
     SetTargetFPS(60);
 
-    while(!WindowShouldClose()) {
+    while(!WindowShouldClose() && !hasLost) {
 
         BeginDrawing();
 
@@ -56,6 +74,16 @@ int main() {
         for (auto& e : enemies) {
 
             e->Update(deltaTime);
+
+            if (generateRandomNumber() < 0 && e->shootDelayTimer >= 5) {
+
+                Projectile proj = e->Shoot(deltaTime, {player.rect.x, player.rect.y});
+                projectiles.push_back(proj);
+                e->shootDelayTimer = 0;
+
+            }
+            else e->shootDelayTimer += deltaTime;
+
             DrawRectangleRec(e->rect, RED);
 
         }
@@ -66,6 +94,7 @@ int main() {
             proj.rect.x += proj.direction.x * proj.speed * deltaTime;
 
             if (proj.rect.y < 0) projectiles.erase(std::remove(projectiles.begin(), projectiles.end(), proj), projectiles.end());
+            if (CheckCollisionRecs(proj.rect, player.rect)) hasLost = true;
 
             DrawRectangleRec(proj.rect, RED);
 
