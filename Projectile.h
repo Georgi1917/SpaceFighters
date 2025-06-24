@@ -2,7 +2,8 @@
 
 #include "include/raylib.h"
 
-class Projectile {
+class Projectile 
+{
 
     public:
         static int nextId;
@@ -15,4 +16,5 @@ class Projectile {
     bool CheckOutOfBounds();
     bool operator==(const Projectile &other) const;
     Projectile();
+    
 };

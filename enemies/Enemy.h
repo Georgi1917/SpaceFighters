@@ -3,7 +3,8 @@
 #include "../include/raylib.h"
 #include "../Projectile.h"
 
-class Enemy {
+class Enemy 
+{
 
     public:
 

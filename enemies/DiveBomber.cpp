@@ -3,7 +3,8 @@
 #include <cmath>
 #include <iostream>
 
-DiveBomber::DiveBomber(Vector2 fp, Vector2 swp) {
+DiveBomber::DiveBomber(Vector2 fp, Vector2 swp) 
+{
 
     id = nextId++;
     health = 1;
@@ -19,13 +20,15 @@ DiveBomber::DiveBomber(Vector2 fp, Vector2 swp) {
 
 }
 
-float DiveBomber::Length(Vector2 vec) const {
+float DiveBomber::Length(Vector2 vec) const 
+{
 
     return std::sqrt(vec.x * vec.x + vec.y * vec.y);
 
 }
 
-Vector2 DiveBomber::Normalize(Vector2 vec) const {
+Vector2 DiveBomber::Normalize(Vector2 vec) const 
+{
 
     float len = Length(vec);
 
@@ -35,7 +38,8 @@ Vector2 DiveBomber::Normalize(Vector2 vec) const {
 
 }
 
-Projectile DiveBomber::Shoot(float delta, Vector2 playerPos) {
+Projectile DiveBomber::Shoot(float delta, Vector2 playerPos) 
+{
 
     Rectangle projRect;
     projRect.width = 8;
@@ -56,13 +60,15 @@ Projectile DiveBomber::Shoot(float delta, Vector2 playerPos) {
 
 }
 
-void DiveBomber::TakeDamage(int amount) {
+void DiveBomber::TakeDamage(int amount) 
+{
 
     this->health -= amount;
 
 }
 
-void DiveBomber::Update(float delta) {
+void DiveBomber::Update(float delta) 
+{
 
     velocity = Normalize({this->finalPos.x - this->spawnPoints.x, this->finalPos.y - this->spawnPoints.y});
 

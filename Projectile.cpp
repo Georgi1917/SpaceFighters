@@ -5,7 +5,8 @@ int Projectile::nextId = 1;
 
 Projectile::Projectile() : id(nextId++) {}
 
-bool Projectile::CheckOutOfBounds() {
+bool Projectile::CheckOutOfBounds() 
+{
 
     return (rect.x < 0 || 
             rect.x + rect.width > GetScreenWidth() || 
@@ -14,6 +15,9 @@ bool Projectile::CheckOutOfBounds() {
 
 }
 
-bool Projectile::operator==(const Projectile& other) const {
+bool Projectile::operator==(const Projectile& other) const 
+{
+
     return id == other.id;
+    
 }

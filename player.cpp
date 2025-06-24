@@ -2,7 +2,8 @@
 #include "Player.h"
 #include "Projectile.h"
 
-void Player::CheckOutOfBounds(char axis, Vector2 &dir) {
+void Player::CheckOutOfBounds(char axis, Vector2 &dir) 
+{
 
     if (axis == 'x') {
 
@@ -23,7 +24,8 @@ void Player::CheckOutOfBounds(char axis, Vector2 &dir) {
 
 }
 
-void Player::Move(float delta) {
+void Player::Move(float delta) 
+{
 
     Vector2 dir = { 0 };
 
@@ -37,7 +39,8 @@ void Player::Move(float delta) {
 
 }
 
-Projectile Player::Shoot() {
+Projectile Player::Shoot() 
+{
 
     Rectangle projRect;
     projRect.width = 5;

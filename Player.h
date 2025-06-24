@@ -3,7 +3,8 @@
 #include "Projectile.h"
 
 
-class Player {
+class Player 
+{
 
     public:
         Rectangle rect;

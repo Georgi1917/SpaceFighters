@@ -2,7 +2,8 @@
 #include "../include/raylib.h"
 #include "Enemy.h"
 
-class DiveBomber : public Enemy {
+class DiveBomber : public Enemy 
+{
 
     public:
         Vector2 finalPos;

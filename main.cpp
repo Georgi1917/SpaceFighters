@@ -10,7 +10,8 @@
 
 #define PLAYER_SPEED 300.0f
 
-int generateRandomNumber() {
+int generateRandomNumber() 
+{
 
     srand((unsigned) time(NULL));
 
@@ -18,7 +19,8 @@ int generateRandomNumber() {
 
 }
 
-int main() {
+int main() 
+{
 
     int screenWidth = 650;
     int screenHeight = 900;
@@ -62,7 +64,8 @@ int main() {
 
         //std::cout << enemies.size() << "\n";
 
-        if (IsKeyDown(KEY_Z) && player.timerForShooting >= 0.1) {
+        if (IsKeyDown(KEY_Z) && player.timerForShooting >= 0.1) 
+        {
 
             Projectile proj = player.Shoot();
             projectiles.push_back(proj);
@@ -77,7 +80,8 @@ int main() {
 
             (*it)->Update(deltaTime);
 
-            if (generateRandomNumber() < 0 && (*it)->shootDelayTimer >= 5) {
+            if (generateRandomNumber() < 0 && (*it)->shootDelayTimer >= 5) 
+            {
 
                 Projectile proj = (*it)->Shoot(deltaTime, {player.rect.x, player.rect.y});
                 projectiles.push_back(proj);
@@ -86,7 +90,8 @@ int main() {
             }
             else (*it)->shootDelayTimer += deltaTime;
 
-            for (auto proj = projectiles.begin(); proj != projectiles.end();) {
+            for (auto proj = projectiles.begin(); proj != projectiles.end();) 
+            {
 
                 if (CheckCollisionRecs((*it)->rect, (*proj).rect) && !(*proj).isEnemy) (*it)->TakeDamage(player.damage);
                 ++proj;
