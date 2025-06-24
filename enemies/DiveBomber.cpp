@@ -5,6 +5,7 @@
 
 DiveBomber::DiveBomber(Vector2 fp, Vector2 swp) {
 
+    id = nextId++;
     health = 1;
     damage = 1;
     speed = 80.0f;
@@ -49,6 +50,7 @@ Projectile DiveBomber::Shoot(float delta, Vector2 playerPos) {
     proj.direction.y = dir.y;
     proj.direction.x = dir.x;
     proj.speed = 100.0f;
+    proj.isEnemy = true;
 
     return proj;
 

@@ -10,7 +10,9 @@ class Projectile {
         Rectangle rect;
         float speed;
         Vector2 direction;
+        bool isEnemy;
 
+    bool CheckOutOfBounds();
     bool operator==(const Projectile &other) const;
     Projectile();
 };

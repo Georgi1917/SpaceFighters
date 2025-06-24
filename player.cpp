@@ -50,6 +50,7 @@ Projectile Player::Shoot() {
     proj.direction.y = -1;
     proj.direction.x = 0;
     proj.speed = 800.0f;
+    proj.isEnemy = false;
 
     return proj;
 
