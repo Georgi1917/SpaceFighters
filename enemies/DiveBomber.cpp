@@ -15,7 +15,7 @@ DiveBomber::DiveBomber(Vector2 fp, Vector2 swp)
     spawnPoints = swp;
     velocity = { 0 };
 
-    hasReachedFinalPos = false;
+    hasAppeared = false;
     rect = {spawnPoints.x, spawnPoints.y, 20.0f, 20.0f};
 
 }
@@ -77,18 +77,18 @@ void DiveBomber::Update(float delta)
     if (fabs(this->rect.x - this->finalPos.x) < tolerance &&
         fabs(this->rect.y - this->finalPos.y) < tolerance) {
 
-        hasReachedFinalPos = true;
+        hasAppeared = true;
 
     }
 
-    if (!hasReachedFinalPos) {
+    if (!hasAppeared) {
 
         this->rect.x += velocity.x * speed * delta;
         this->rect.y += velocity.y * speed * delta;
 
     }
 
-    if (hasReachedFinalPos) {
+    if (hasAppeared) {
 
         this->rect.x += velocity.x * speed * delta;
         this->rect.y -= velocity.y * speed * delta;

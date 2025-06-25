@@ -62,8 +62,6 @@ int main()
         float deltaTime = GetFrameTime();
         player.Move(deltaTime);
 
-        //std::cout << enemies.size() << "\n";
-
         if (IsKeyDown(KEY_Z) && player.timerForShooting >= 0.1) 
         {
 
@@ -98,14 +96,16 @@ int main()
 
             }
 
-            if ((*it)->health > 0)
+            if ((*it)->health <= 0 || ((*it)->CheckForOutOfBounds() && (*it)->hasAppeared))
             {
 
-                DrawRectangleRec((*it)->rect, RED);
-                ++it;
+                it = enemies.erase(it);
+                continue;
 
             }
-            else it = enemies.erase(it); 
+
+            DrawRectangleRec((*it)->rect, RED);
+            ++it;
 
         }
 

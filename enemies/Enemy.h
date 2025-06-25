@@ -17,10 +17,12 @@ class Enemy
         int damage;
         float speed;
         float shootDelayTimer;
+        bool hasAppeared;
 
         Projectile virtual Shoot(float delta, Vector2 playerPos) = 0;
         void virtual TakeDamage(int amount) = 0;
         void virtual Update(float delta) = 0;
         bool operator==(const Enemy &other) const;
+        bool CheckForOutOfBounds();
 
 };

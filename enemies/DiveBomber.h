@@ -8,7 +8,6 @@ class DiveBomber : public Enemy
     public:
         Vector2 finalPos;
         Vector2 spawnPoints;
-        bool hasReachedFinalPos;
 
         DiveBomber(Vector2 fp, Vector2 swp);
         Projectile Shoot(float delta, Vector2 playerPos) override;
