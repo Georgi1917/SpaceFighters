@@ -10,7 +10,7 @@ DiveBomber::DiveBomber(Vector2 fp, Vector2 swp)
     health = 1;
     damage = 1;
     speed = 80.0f;
-    shootDelayTimer = 3.0f;
+    shootDelayTimer = 0.0f;
     finalPos = fp;
     spawnPoints = swp;
     velocity = { 0 };
