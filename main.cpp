@@ -55,7 +55,8 @@ int main()
 
     SetTargetFPS(60);
 
-    while(!WindowShouldClose() && !hasLost) {
+    while(!WindowShouldClose() && !hasLost) 
+    {
 
         BeginDrawing();
 
@@ -74,9 +75,12 @@ int main()
 
         DrawRectangleRec(player.rect, GREEN);
 
-        for (auto it = enemies.begin(); it != enemies.end();) {
+        for (auto it = enemies.begin(); it != enemies.end();) 
+        {
 
             (*it)->Update(deltaTime);
+
+            if (CheckCollisionRecs((*it)->rect, player.rect)) hasLost = true;
 
             if (generateRandomNumber() < 0 && (*it)->shootDelayTimer >= 5) 
             {
@@ -109,7 +113,8 @@ int main()
 
         }
 
-        for (Projectile &proj : projectiles) {
+        for (Projectile &proj : projectiles) 
+        {
 
             proj.rect.y += proj.direction.y * proj.speed * deltaTime;
             proj.rect.x += proj.direction.x * proj.speed * deltaTime;

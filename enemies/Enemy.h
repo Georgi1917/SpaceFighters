@@ -20,9 +20,11 @@ class Enemy
         bool hasAppeared;
 
         Projectile virtual Shoot(float delta, Vector2 playerPos) = 0;
-        void virtual TakeDamage(int amount) = 0;
+        void TakeDamage(int amount);
         void virtual Update(float delta) = 0;
         bool operator==(const Enemy &other) const;
         bool CheckForOutOfBounds();
+        float Length(Vector2 vec) const;
+        Vector2 Normalize(Vector2 vec) const;
 
 };

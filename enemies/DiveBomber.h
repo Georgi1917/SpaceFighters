@@ -11,9 +11,6 @@ class DiveBomber : public Enemy
 
         DiveBomber(Vector2 fp, Vector2 swp);
         Projectile Shoot(float delta, Vector2 playerPos) override;
-        void TakeDamage(int amount) override;
         void Update(float delta) override;
-        float Length(Vector2 vec) const;
-        Vector2 Normalize(Vector2 vec) const;
 
 };

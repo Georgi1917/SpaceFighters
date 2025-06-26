@@ -20,24 +20,6 @@ DiveBomber::DiveBomber(Vector2 fp, Vector2 swp)
 
 }
 
-float DiveBomber::Length(Vector2 vec) const 
-{
-
-    return std::sqrt(vec.x * vec.x + vec.y * vec.y);
-
-}
-
-Vector2 DiveBomber::Normalize(Vector2 vec) const 
-{
-
-    float len = Length(vec);
-
-    if (len == 0) return {0, 0};
-
-    return {vec.x / len, vec.y / len};
-
-}
-
 Projectile DiveBomber::Shoot(float delta, Vector2 playerPos) 
 {
 
@@ -57,13 +39,6 @@ Projectile DiveBomber::Shoot(float delta, Vector2 playerPos)
     proj.isEnemy = true;
 
     return proj;
-
-}
-
-void DiveBomber::TakeDamage(int amount) 
-{
-
-    this->health -= amount;
 
 }
 
