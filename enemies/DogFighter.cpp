@@ -1,4 +1,6 @@
 #include "DogFighter.h"
+#include <cmath>
+#include <iostream>
 
 DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
 {
@@ -6,7 +8,7 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
     id = nextId++;
     health = 1;
     damage = 1;
-    speed = 110.0f;
+    speed = 50.0f;
 
     setPoints = sp;
     endPoints = ep;
@@ -46,18 +48,24 @@ Projectile DogFighter::Shoot(float delta, Vector2 playerPos)
 void DogFighter::Update(float delta)
 {
 
-    velocity = Normalize({this->setPoints.x - this->currPoint.x, this->setPoints.y - this->currPoint.y});
-
     float tolerance = 1.0f;
 
     if (fabs(this->rect.x - this->currPoint.x) < tolerance &&
         fabs(this->rect.y - this->currPoint.y < tolerance))
     {
 
+        std::cout << "YES" << "\n";
         currPointIndex++;
+        setPoints = currPoint;
         currPoint = endPoints[currPointIndex];
-        
+        hasAppeared = true;
+
     }
+
+    velocity = Normalize({this->currPoint.x - this->setPoints.x, this->currPoint.y - this->setPoints.y});
+
+    this->rect.x += velocity.x * speed * delta;
+    this->rect.y += velocity.y * speed * delta;
 
 }
 

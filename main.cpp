@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "enemies/DiveBomber.h"
 #include "enemies/Enemy.h"
+#include "enemies/DogFighter.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -38,17 +39,19 @@ int main()
     std::vector<Projectile> projectiles;
     std::vector<std::unique_ptr<Enemy>> enemies;
 
-    enemies.push_back(std::make_unique<DiveBomber>(
-        Vector2{300, 500}, Vector2{500, -10}
-    ));
-    enemies.push_back(std::make_unique<DiveBomber>(
-        Vector2{500, 600}, Vector2{400, -10}
-    ));
-    enemies.push_back(std::make_unique<DiveBomber>(
-        Vector2{100, 600}, Vector2{300, -10}
-    ));
-    enemies.push_back(std::make_unique<DiveBomber>(
-        Vector2{450, 500}, Vector2{700, -10}
+    // enemies.push_back(std::make_unique<DiveBomber>(
+    //     Vector2{600, 600}, Vector2{500, -10}
+    // ));
+    // enemies.push_back(std::make_unique<DiveBomber>(
+    //     Vector2{500, 600}, Vector2{400, -10}
+    // ));
+    // enemies.push_back(std::make_unique<DiveBomber>(
+    //     Vector2{400, 600}, Vector2{300, -10}
+    // ));
+    enemies.push_back(std::make_unique<DogFighter>(
+        Vector2{-50, 600}, std::vector<Vector2>{
+            {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
+        }
     ));
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
