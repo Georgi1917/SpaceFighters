@@ -11,6 +11,7 @@ class Bomber : public Enemy {
         Projectile Shoot(float delta, Vector2 playerPos) override;
         void Update(float delta) override;
 
+        Bomber(Vector2 sp, Vector2 ep);
         Projectile ShootSpecial(float delta, Vector2 playerPos);
 
 };

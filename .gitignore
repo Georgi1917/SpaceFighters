@@ -5,3 +5,4 @@ Projectile.o
 enemies/DiveBomber.o
 enemies/Enemy.o
 enemies/DogFighter.o
+enemies/Bomber.o
