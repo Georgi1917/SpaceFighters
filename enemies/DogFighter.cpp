@@ -5,10 +5,12 @@
 DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
 {
 
-    id = nextId++;
+    srand((unsigned) time(NULL));
+
     health = 1;
     damage = 1;
     speed = 50.0f;
+    randNum = GenerateRandNum();
 
     setPoints = sp;
     endPoints = ep;

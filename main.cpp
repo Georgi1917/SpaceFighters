@@ -16,7 +16,7 @@ int generateRandomNumber()
 
     srand((unsigned) time(NULL));
 
-    return ((rand() % 10) - 5);
+    return (rand() % 6);
 
 }
 
@@ -39,15 +39,15 @@ int main()
     std::vector<Projectile> projectiles;
     std::vector<std::unique_ptr<Enemy>> enemies;
 
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{600, 600}, Vector2{500, -10}
-    // ));
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{500, 600}, Vector2{400, -10}
-    // ));
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{400, 600}, Vector2{300, -10}
-    // ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{600, 600}, Vector2{500, -10}
+    ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{500, 600}, Vector2{400, -10}
+    ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{400, 600}, Vector2{300, -10}
+    ));
     enemies.push_back(std::make_unique<DogFighter>(
         Vector2{-50, 600}, std::vector<Vector2>{
             {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
@@ -83,9 +83,11 @@ int main()
 
             (*it)->Update(deltaTime);
 
+            std::cout << (*it)->randNum << "\n";
+
             if (CheckCollisionRecs((*it)->rect, player.rect)) hasLost = true;
 
-            if (generateRandomNumber() < 0 && (*it)->shootDelayTimer >= 5) 
+            if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5) 
             {
 
                 Projectile proj = (*it)->Shoot(deltaTime, {player.rect.x, player.rect.y});

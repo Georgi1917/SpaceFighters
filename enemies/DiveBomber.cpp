@@ -6,13 +6,18 @@
 DiveBomber::DiveBomber(Vector2 fp, Vector2 swp) 
 {
 
-    id = nextId++;
+    srand((unsigned) time(NULL));
+
     health = 1;
     damage = 1;
     speed = 80.0f;
+    randNum = GenerateRandNum();
+
     shootDelayTimer = 0.0f;
+
     finalPos = fp;
     spawnPoints = swp;
+
     velocity = { 0 };
 
     hasAppeared = false;

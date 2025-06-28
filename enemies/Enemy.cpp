@@ -1,15 +1,8 @@
 #include "../include/raylib.h"
 #include "Enemy.h"
 #include <cmath>
+#include <random>
 
-unsigned int Enemy::nextId = 1;
-
-bool Enemy::operator==(const Enemy &other) const 
-{
-
-    return (id == other.id);
-
-}
 
 bool Enemy::CheckForOutOfBounds()
 {
@@ -44,5 +37,15 @@ Vector2 Enemy::Normalize(Vector2 vec) const
     if (len == 0) return {0, 0};
 
     return {vec.x / len, vec.y / len};
+
+}
+
+int Enemy::GenerateRandNum() {
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 5);
+
+    return dis(gen);
 
 }
