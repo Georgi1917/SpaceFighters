@@ -11,6 +11,7 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
     damage = 1;
     speed = 50.0f;
     randNum = GenerateRandNum();
+    color = RED;
 
     setPoints = sp;
     endPoints = ep;
@@ -56,7 +57,6 @@ void DogFighter::Update(float delta)
         fabs(this->rect.y - this->currPoint.y < tolerance))
     {
 
-        std::cout << "YES" << "\n";
         currPointIndex++;
         setPoints = currPoint;
         currPoint = endPoints[currPointIndex];

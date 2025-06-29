@@ -4,6 +4,7 @@
 #include "enemies/DiveBomber.h"
 #include "enemies/Enemy.h"
 #include "enemies/DogFighter.h"
+#include "enemies/Bomber.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -53,6 +54,9 @@ int main()
             {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
         }
     ));
+    enemies.push_back(std::make_unique<Bomber>(
+        Vector2{-10, 320}, Vector2{(float) GetScreenWidth() + 20, 320}
+    ));
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
 
@@ -83,8 +87,6 @@ int main()
 
             (*it)->Update(deltaTime);
 
-            std::cout << (*it)->randNum << "\n";
-
             if (CheckCollisionRecs((*it)->rect, player.rect)) hasLost = true;
 
             if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5) 
@@ -100,8 +102,14 @@ int main()
             for (auto proj = projectiles.begin(); proj != projectiles.end();) 
             {
 
-                if (CheckCollisionRecs((*it)->rect, (*proj).rect) && !(*proj).isEnemy) (*it)->TakeDamage(player.damage);
-                ++proj;
+                if (CheckCollisionRecs((*it)->rect, (*proj).rect) && !(*proj).isEnemy)
+                {
+
+                    (*it)->TakeDamage(player.damage);
+                    proj = projectiles.erase(proj);
+
+                }
+                else ++proj;
 
             }
 
@@ -113,7 +121,7 @@ int main()
 
             }
 
-            DrawRectangleRec((*it)->rect, RED);
+            DrawRectangleRec((*it)->rect, (*it)->color);
             ++it;
 
         }

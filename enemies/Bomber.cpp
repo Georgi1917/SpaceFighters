@@ -9,6 +9,8 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
     damage = 2;
     speed = 50.0f;
     shootDelayTimer = 0;
+    color = BLUE;
+
     hasAppeared = false;
 
     randNum = GenerateRandNum();
@@ -51,6 +53,11 @@ void Bomber::Update(float delta)
 
     this->rect.x += velocity.x * speed * delta;
     this->rect.y += velocity.y * speed * delta;
+
+    if (this->rect.x > 0 && 
+        this->rect.y > 0 && 
+        this->rect.x + this->rect.width < GetScreenWidth() &&
+        this->rect.y + this->rect.height < GetScreenHeight()) hasAppeared = true;
 
 }
 

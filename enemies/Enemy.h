@@ -11,6 +11,7 @@ class Enemy
         Rectangle rect;
         Texture2D sprite;
         Vector2 velocity;
+        Color color;
         int health;
         int damage;
         float speed;

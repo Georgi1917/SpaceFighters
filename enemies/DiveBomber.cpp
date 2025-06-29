@@ -12,6 +12,7 @@ DiveBomber::DiveBomber(Vector2 fp, Vector2 swp)
     damage = 1;
     speed = 80.0f;
     randNum = GenerateRandNum();
+    color = PURPLE;
 
     shootDelayTimer = 0.0f;
 
