@@ -1,8 +1,9 @@
 main.o
 Player.o
 spacefighters.exe
-Projectile.o
+projectiles/Projectile.o
 enemies/DiveBomber.o
 enemies/Enemy.o
 enemies/DogFighter.o
 enemies/Bomber.o
+.vscode

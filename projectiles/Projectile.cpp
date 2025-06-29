@@ -1,4 +1,3 @@
-#include "include/raylib.h"
 #include "Projectile.h"
 
 int Projectile::nextId = 1;
@@ -20,4 +19,11 @@ bool Projectile::operator==(const Projectile& other) const
 
     return id == other.id;
     
+}
+
+void Projectile::Update(float delta) 
+{
+
+    
+
 }

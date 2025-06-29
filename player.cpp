@@ -1,6 +1,4 @@
-#include "include/raylib.h"
 #include "Player.h"
-#include "Projectile.h"
 
 void Player::CheckOutOfBounds(char axis, Vector2 &dir) 
 {

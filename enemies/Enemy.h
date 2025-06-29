@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../include/raylib.h"
-#include "../Projectile.h"
+#include "../projectiles/Projectile.h"
 
 class Enemy 
 {

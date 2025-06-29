@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/raylib.h"
+#include "../include/raylib.h"
 
 class Projectile 
 {
@@ -9,10 +9,11 @@ class Projectile
         static int nextId;
         int id;
         Rectangle rect;
-        float speed;
         Vector2 direction;
+        float speed;
         bool isEnemy;
 
+    void Update(float delta);
     bool CheckOutOfBounds();
     bool operator==(const Projectile &other) const;
     Projectile();

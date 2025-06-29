@@ -1,6 +1,6 @@
 #include "include/raylib.h"
 #include "Player.h"
-#include "Projectile.h"
+#include "projectiles/Projectile.h"
 #include "enemies/DiveBomber.h"
 #include "enemies/Enemy.h"
 #include "enemies/DogFighter.h"
