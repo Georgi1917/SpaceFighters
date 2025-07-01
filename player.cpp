@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 void Player::CheckOutOfBounds(char axis, Vector2 &dir) 
 {
@@ -37,7 +38,7 @@ void Player::Move(float delta)
 
 }
 
-Projectile Player::Shoot() 
+std::unique_ptr<Projectile> Player::Shoot() 
 {
 
     Rectangle projRect;
@@ -46,13 +47,8 @@ Projectile Player::Shoot()
     projRect.x = (this->rect.x + this->rect.width / 2) - projRect.width / 2;
     projRect.y = this->rect.y - this->rect.height / 2; 
 
-    Projectile proj;
-    proj.rect = projRect;
-    proj.direction.y = -1;
-    proj.direction.x = 0;
-    proj.speed = 800.0f;
-    proj.isEnemy = false;
+    //Projectile proj = Projectile(projRect, {0, -1}, 800.0f, false);
 
-    return proj;
+    return std::make_unique<BasicProjectile>(projRect, Vector2{0, -1}, 800.0f, false);
 
 }

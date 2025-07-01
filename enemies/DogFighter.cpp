@@ -26,7 +26,7 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
 
 }
 
-Projectile DogFighter::Shoot(float delta, Vector2 playerPos)
+std::unique_ptr<Projectile> DogFighter::Shoot(float delta, Vector2 playerPos)
 {
 
     Rectangle projRect;
@@ -37,14 +37,7 @@ Projectile DogFighter::Shoot(float delta, Vector2 playerPos)
 
     Vector2 dir = Normalize({playerPos.x - projRect.x, playerPos.y - projRect.y});
 
-    Projectile proj;
-    proj.rect = projRect;
-    proj.direction.y = dir.y;
-    proj.direction.x = dir.x;
-    proj.speed = 100.0f;
-    proj.isEnemy = true;
-
-    return proj;
+    return std::make_unique<BasicProjectile>(projRect, dir, 100.0f, true);
 
 }
 

@@ -24,7 +24,7 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
 
 }
 
-Projectile Bomber::Shoot(float delta, Vector2 playerPos)
+std::unique_ptr<Projectile> Bomber::Shoot(float delta, Vector2 playerPos)
 {
 
     Rectangle projRect;
@@ -35,14 +35,7 @@ Projectile Bomber::Shoot(float delta, Vector2 playerPos)
 
     Vector2 dir = Normalize({playerPos.x - projRect.x, playerPos.y - projRect.y});
 
-    Projectile proj;
-    proj.rect = projRect;
-    proj.direction.y = dir.y;
-    proj.direction.x = dir.x;
-    proj.speed = 100.0f;
-    proj.isEnemy = true;
-
-    return proj;
+    return std::make_unique<BasicProjectile>(projRect, dir, 100.0f, true);
 
 }
 
@@ -58,10 +51,5 @@ void Bomber::Update(float delta)
         this->rect.y > 0 && 
         this->rect.x + this->rect.width < GetScreenWidth() &&
         this->rect.y + this->rect.height < GetScreenHeight()) hasAppeared = true;
-
-}
-
-Projectile Bomber::ShootSpecial(float delta, Vector2 playerPos)
-{
 
 }

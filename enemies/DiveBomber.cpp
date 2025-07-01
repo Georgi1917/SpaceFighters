@@ -25,7 +25,7 @@ DiveBomber::DiveBomber(Vector2 fp, Vector2 swp)
 
 }
 
-Projectile DiveBomber::Shoot(float delta, Vector2 playerPos) 
+std::unique_ptr<Projectile> DiveBomber::Shoot(float delta, Vector2 playerPos) 
 {
 
     Rectangle projRect;
@@ -36,14 +36,7 @@ Projectile DiveBomber::Shoot(float delta, Vector2 playerPos)
 
     Vector2 dir = Normalize({playerPos.x - projRect.x, playerPos.y - projRect.y});
 
-    Projectile proj;
-    proj.rect = projRect;
-    proj.direction.y = dir.y;
-    proj.direction.x = dir.x;
-    proj.speed = 100.0f;
-    proj.isEnemy = true;
-
-    return proj;
+    return std::make_unique<BasicProjectile>(projRect, dir, 100.0f, true);
 
 }
 

@@ -2,6 +2,7 @@ main.o
 Player.o
 spacefighters.exe
 projectiles/Projectile.o
+projectiles/BasicProjectile.o
 enemies/DiveBomber.o
 enemies/Enemy.o
 enemies/DogFighter.o

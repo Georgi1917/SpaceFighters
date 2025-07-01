@@ -2,7 +2,10 @@ CXX = g++
 CXXFLAGS = -Iinclude -Wall -std=c++17
 LDFLAGS = -Llib -lraylib -lwinmm -lgdi32 -lopengl32
 
-SRC = main.cpp Player.cpp projectiles/Projectile.cpp enemies/DiveBomber.cpp enemies/Enemy.cpp enemies/DogFighter.cpp enemies/Bomber.cpp
+ADDITIONAL_PROJECTILES = projectiles/Projectile.cpp projectiles/BasicProjectile.cpp
+ADDITIONAL_ENEMIES = enemies/DiveBomber.cpp enemies/Enemy.cpp enemies/DogFighter.cpp enemies/Bomber.cpp
+
+SRC = main.cpp Player.cpp $(ADDITIONAL_PROJECTILES) $(ADDITIONAL_ENEMIES)
 OBJ = $(SRC:.cpp=.o)
 
 TARGET = spacefighters.exe

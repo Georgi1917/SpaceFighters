@@ -2,6 +2,8 @@
 
 #include "../include/raylib.h"
 #include "../projectiles/Projectile.h"
+#include "../projectiles/BasicProjectile.h"
+#include <memory>
 
 class Enemy 
 {
@@ -19,7 +21,7 @@ class Enemy
         bool hasAppeared;
         int randNum;
 
-        Projectile virtual Shoot(float delta, Vector2 playerPos) = 0;
+        std::unique_ptr<Projectile> virtual Shoot(float delta, Vector2 playerPos) = 0;
         void virtual Update(float delta) = 0;
 
         void TakeDamage(int amount);

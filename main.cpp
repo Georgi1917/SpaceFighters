@@ -1,6 +1,7 @@
 #include "include/raylib.h"
 #include "Player.h"
 #include "projectiles/Projectile.h"
+#include "projectiles/BasicProjectile.h"
 #include "enemies/DiveBomber.h"
 #include "enemies/Enemy.h"
 #include "enemies/DogFighter.h"
@@ -37,7 +38,7 @@ int main()
     player.timerForShooting = 0;
     player.speed = PLAYER_SPEED;
 
-    std::vector<Projectile> projectiles;
+    std::vector<std::unique_ptr<Projectile>> projectiles;
     std::vector<std::unique_ptr<Enemy>> enemies;
 
     enemies.push_back(std::make_unique<DiveBomber>(
@@ -73,8 +74,7 @@ int main()
         if (IsKeyDown(KEY_Z) && player.timerForShooting >= 0.1) 
         {
 
-            Projectile proj = player.Shoot();
-            projectiles.push_back(proj);
+            projectiles.push_back(player.Shoot());
             player.timerForShooting = 0;
 
         }
@@ -92,8 +92,7 @@ int main()
             if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5) 
             {
 
-                Projectile proj = (*it)->Shoot(deltaTime, {player.rect.x, player.rect.y});
-                projectiles.push_back(proj);
+                projectiles.push_back((*it)->Shoot(deltaTime, {player.rect.x, player.rect.y}));
                 (*it)->shootDelayTimer = 0;
 
             }
@@ -102,7 +101,7 @@ int main()
             for (auto proj = projectiles.begin(); proj != projectiles.end();) 
             {
 
-                if (CheckCollisionRecs((*it)->rect, (*proj).rect) && !(*proj).isEnemy)
+                if (CheckCollisionRecs((*it)->rect, (*proj)->rect) && !(*proj)->isEnemy)
                 {
 
                     (*it)->TakeDamage(player.damage);
@@ -126,17 +125,23 @@ int main()
 
         }
 
-        for (Projectile &proj : projectiles) 
+        for (auto proj = projectiles.begin(); proj != projectiles.end();) 
         {
 
-            proj.rect.y += proj.direction.y * proj.speed * deltaTime;
-            proj.rect.x += proj.direction.x * proj.speed * deltaTime;
+            (*proj)->Update(deltaTime);
 
-            if (proj.CheckOutOfBounds()) projectiles.erase(std::remove(projectiles.begin(), projectiles.end(), proj), 
-                                         projectiles.end());
-            if (CheckCollisionRecs(proj.rect, player.rect) && proj.isEnemy) hasLost = true;
+            if (CheckCollisionRecs((*proj)->rect, player.rect) && (*proj)->isEnemy) hasLost = true;
 
-            DrawRectangleRec(proj.rect, RED);
+            if ((*proj)->CheckOutOfBounds())
+            {
+
+                proj = projectiles.erase(proj);
+                continue;
+
+            } 
+
+            DrawRectangleRec((*proj)->rect, RED);
+            ++proj;
 
         }
 
