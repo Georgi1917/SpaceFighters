@@ -6,8 +6,8 @@ ExplosiveProjectile::ExplosiveProjectile(Rectangle r, Vector2 dir, float s, bool
     timeToExplode = 4;
     countdown = 0.0f;
     explosionRadius = 0.0f;
-    maxRadius = 50.0f;
-    explosionSpeed = 200.0f;
+    maxRadius = 60.0f;
+    explosionSpeed = 100.0f;
 
 }
 

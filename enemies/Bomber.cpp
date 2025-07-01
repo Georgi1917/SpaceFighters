@@ -35,7 +35,7 @@ std::unique_ptr<Projectile> Bomber::Shoot(float delta, Vector2 playerPos)
 
     Vector2 dir = Normalize({playerPos.x - projRect.x, playerPos.y - projRect.y});
 
-    return std::make_unique<BasicProjectile>(projRect, dir, 100.0f, true);
+    return std::make_unique<ExplosiveProjectile>(projRect, dir, 100.0f, true);
 
 }
 

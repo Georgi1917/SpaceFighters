@@ -3,6 +3,7 @@
 #include "../include/raylib.h"
 #include "../projectiles/Projectile.h"
 #include "../projectiles/BasicProjectile.h"
+#include "../projectiles/ExplosiveProjectile.h"
 #include <memory>
 
 class Enemy 
