@@ -4,6 +4,7 @@
 #include "../projectiles/Projectile.h"
 #include "../projectiles/BasicProjectile.h"
 #include "../projectiles/ExplosiveProjectile.h"
+#include "../Player.h"
 #include <memory>
 
 class Enemy 
@@ -22,7 +23,7 @@ class Enemy
         bool hasAppeared;
         int randNum;
 
-        std::unique_ptr<Projectile> virtual Shoot(float delta, Vector2 playerPos) = 0;
+        std::unique_ptr<Projectile> virtual Shoot(float delta, Player player) = 0;
         void virtual Update(float delta) = 0;
 
         void TakeDamage(int amount);

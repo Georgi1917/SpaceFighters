@@ -24,7 +24,7 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
 
 }
 
-std::unique_ptr<Projectile> Bomber::Shoot(float delta, Vector2 playerPos)
+std::unique_ptr<Projectile> Bomber::Shoot(float delta, Player player)
 {
 
     Rectangle projRect;
@@ -33,9 +33,9 @@ std::unique_ptr<Projectile> Bomber::Shoot(float delta, Vector2 playerPos)
     projRect.x = (this->rect.x + this->rect.width / 2) - projRect.width / 2;
     projRect.y = this->rect.y + this->rect.height + 10; 
 
-    Vector2 dir = Normalize({playerPos.x - projRect.x, playerPos.y - projRect.y});
+    Vector2 dir = Normalize({player.rect.x - projRect.x, player.rect.y - projRect.y});
 
-    return std::make_unique<ExplosiveProjectile>(projRect, dir, 100.0f, true);
+    return std::make_unique<ExplosiveProjectile>(projRect, dir, 100.0f, true, &player);
 
 }
 

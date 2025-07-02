@@ -11,7 +11,7 @@ class DiveBomber : public Enemy
         Vector2 spawnPoints;
 
         DiveBomber(Vector2 fp, Vector2 swp);
-        std::unique_ptr<Projectile> Shoot(float delta, Vector2 playerPos) override;
+        std::unique_ptr<Projectile> Shoot(float delta, Player player) override;
         void Update(float delta) override;
 
 };

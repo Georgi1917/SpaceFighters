@@ -8,7 +8,7 @@ class Bomber : public Enemy {
         Vector2 spawnPoint;
         Vector2 endPoint;
 
-        std::unique_ptr<Projectile> Shoot(float delta, Vector2 playerPos) override;
+        std::unique_ptr<Projectile> Shoot(float delta, Player player) override;
         void Update(float delta) override;
 
         Bomber(Vector2 sp, Vector2 ep);

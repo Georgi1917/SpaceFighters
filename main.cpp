@@ -27,7 +27,6 @@ int main()
 
     int screenWidth = 650;
     int screenHeight = 900;
-    bool hasLost = false;
 
     Rectangle playerRect = {300, 700, 40, 40};
     Player player = { 0 };
@@ -37,24 +36,25 @@ int main()
     player.score = 0;
     player.timerForShooting = 0;
     player.speed = PLAYER_SPEED;
+    player.hasLost = false;
 
     std::vector<std::unique_ptr<Projectile>> projectiles;
     std::vector<std::unique_ptr<Enemy>> enemies;
 
-    enemies.push_back(std::make_unique<DiveBomber>(
-        Vector2{600, 600}, Vector2{500, -10}
-    ));
-    enemies.push_back(std::make_unique<DiveBomber>(
-        Vector2{500, 600}, Vector2{400, -10}
-    ));
-    enemies.push_back(std::make_unique<DiveBomber>(
-        Vector2{400, 600}, Vector2{300, -10}
-    ));
-    enemies.push_back(std::make_unique<DogFighter>(
-        Vector2{-50, 600}, std::vector<Vector2>{
-            {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
-        }
-    ));
+    // enemies.push_back(std::make_unique<DiveBomber>(
+    //     Vector2{600, 600}, Vector2{500, -10}
+    // ));
+    // enemies.push_back(std::make_unique<DiveBomber>(
+    //     Vector2{500, 600}, Vector2{400, -10}
+    // ));
+    // enemies.push_back(std::make_unique<DiveBomber>(
+    //     Vector2{400, 600}, Vector2{300, -10}
+    // ));
+    // enemies.push_back(std::make_unique<DogFighter>(
+    //     Vector2{-50, 600}, std::vector<Vector2>{
+    //         {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
+    //     }
+    // ));
     enemies.push_back(std::make_unique<Bomber>(
         Vector2{-10, 320}, Vector2{(float) GetScreenWidth() + 20, 320}
     ));
@@ -63,7 +63,7 @@ int main()
 
     SetTargetFPS(60);
 
-    while(!WindowShouldClose() && !hasLost) 
+    while(!WindowShouldClose() && !player.hasLost) 
     {
 
         BeginDrawing();
@@ -87,12 +87,12 @@ int main()
 
             (*it)->Update(deltaTime);
 
-            if (CheckCollisionRecs((*it)->rect, player.rect)) hasLost = true;
+            if (CheckCollisionRecs((*it)->rect, player.rect)) player.hasLost = true;
 
             if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5) 
             {
 
-                projectiles.push_back((*it)->Shoot(deltaTime, {player.rect.x, player.rect.y}));
+                projectiles.push_back((*it)->Shoot(deltaTime, player));
                 (*it)->shootDelayTimer = 0;
 
             }
@@ -130,9 +130,9 @@ int main()
 
             (*proj)->Update(deltaTime);
 
-            if (CheckCollisionRecs((*proj)->rect, player.rect) && (*proj)->isEnemy) hasLost = true;
+            if (CheckCollisionRecs((*proj)->rect, player.rect) && (*proj)->isEnemy) player.hasLost = true;
 
-            if ((*proj)->CheckOutOfBounds())
+            if ((*proj)->CheckOutOfBounds() || (*proj)->toBeDeleted)
             {
 
                 proj = projectiles.erase(proj);

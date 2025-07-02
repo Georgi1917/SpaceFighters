@@ -11,6 +11,7 @@ Projectile::Projectile(Rectangle r, Vector2 dir, float s, bool enemy)
     direction = dir;
     speed = s;
     isEnemy = enemy;
+    toBeDeleted = false;
 
 }
 

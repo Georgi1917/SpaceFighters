@@ -15,6 +15,7 @@ class Player
         float damage;
         float speed;
         float timerForShooting;
+        bool hasLost;
 
         std::unique_ptr<Projectile> Shoot();
         void Move(float delta);

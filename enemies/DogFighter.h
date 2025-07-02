@@ -14,7 +14,7 @@ class DogFighter : public Enemy
         std::vector<Vector2> endPoints;
 
         DogFighter(Vector2 sp, std::vector<Vector2> ep);
-        std::unique_ptr<Projectile> Shoot(float delta, Vector2 playerPos) override;
+        std::unique_ptr<Projectile> Shoot(float delta, Player player) override;
         void Update(float delta) override;
 
 };

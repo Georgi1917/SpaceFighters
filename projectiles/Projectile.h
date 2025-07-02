@@ -13,6 +13,7 @@ class Projectile
         Vector2 direction;
         float speed;
         bool isEnemy;
+        bool toBeDeleted;
 
     void virtual Update(float delta) = 0;
 
