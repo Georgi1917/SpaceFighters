@@ -36,7 +36,13 @@ void ExplosiveProjectile::Explode(float delta)
 
         DrawCircle(this->rect.x, this->rect.y, explosionRadius, RED);
 
-        if (CheckForCollisionWithPlayer(*player)) std::cout << "YESSS" << "\n";
+        if (CheckForCollisionWithPlayer(*player))
+        {
+
+            std::cout << "YESSS" << "\n";
+            player->hasLost = true;
+
+        } 
 
         explosionRadius += explosionSpeed * delta;
 

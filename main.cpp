@@ -38,23 +38,25 @@ int main()
     player.speed = PLAYER_SPEED;
     player.hasLost = false;
 
+    Player *p = &player;
+
     std::vector<std::unique_ptr<Projectile>> projectiles;
     std::vector<std::unique_ptr<Enemy>> enemies;
 
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{600, 600}, Vector2{500, -10}
-    // ));
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{500, 600}, Vector2{400, -10}
-    // ));
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{400, 600}, Vector2{300, -10}
-    // ));
-    // enemies.push_back(std::make_unique<DogFighter>(
-    //     Vector2{-50, 600}, std::vector<Vector2>{
-    //         {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
-    //     }
-    // ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{600, 600}, Vector2{500, -10}
+    ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{500, 600}, Vector2{400, -10}
+    ));
+    enemies.push_back(std::make_unique<DiveBomber>(
+        Vector2{400, 600}, Vector2{300, -10}
+    ));
+    enemies.push_back(std::make_unique<DogFighter>(
+        Vector2{-50, 600}, std::vector<Vector2>{
+            {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
+        }
+    ));
     enemies.push_back(std::make_unique<Bomber>(
         Vector2{-10, 320}, Vector2{(float) GetScreenWidth() + 20, 320}
     ));
@@ -92,7 +94,7 @@ int main()
             if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5) 
             {
 
-                projectiles.push_back((*it)->Shoot(deltaTime, player));
+                projectiles.push_back((*it)->Shoot(deltaTime, p));
                 (*it)->shootDelayTimer = 0;
 
             }
