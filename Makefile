@@ -3,7 +3,7 @@ CXXFLAGS = -Iinclude -Wall -std=c++17
 LDFLAGS = -Llib -lraylib -lwinmm -lgdi32 -lopengl32
 
 ADDITIONAL_PROJECTILES = projectiles/Projectile.cpp projectiles/BasicProjectile.cpp projectiles/ExplosiveProjectile.cpp
-ADDITIONAL_ENEMIES = enemies/DiveBomber.cpp enemies/Enemy.cpp enemies/DogFighter.cpp enemies/Bomber.cpp
+ADDITIONAL_ENEMIES = enemies/DiveBomber.cpp enemies/Enemy.cpp enemies/DogFighter.cpp enemies/Bomber.cpp enemies/HeavyFighter.cpp
 
 SRC = main.cpp Player.cpp $(ADDITIONAL_PROJECTILES) $(ADDITIONAL_ENEMIES)
 OBJ = $(SRC:.cpp=.o)
