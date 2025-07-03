@@ -6,6 +6,7 @@
 #include "enemies/Enemy.h"
 #include "enemies/DogFighter.h"
 #include "enemies/Bomber.h"
+#include "enemies/HeavyFighter.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -59,6 +60,9 @@ int main()
     ));
     enemies.push_back(std::make_unique<Bomber>(
         Vector2{-10, 320}, Vector2{(float) GetScreenWidth() + 20, 320}
+    ));
+    enemies.push_back(std::make_unique<HeavyFighter>(
+        Vector2{230, 910}, Vector2{230, 400}, Vector2{230, -10}
     ));
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
@@ -140,9 +144,8 @@ int main()
                 proj = projectiles.erase(proj);
                 continue;
 
-            } 
+            }
 
-            DrawRectangleRec((*proj)->rect, RED);
             ++proj;
 
         }

@@ -4,6 +4,7 @@
 #include "../projectiles/Projectile.h"
 #include "../projectiles/BasicProjectile.h"
 #include "../projectiles/ExplosiveProjectile.h"
+#include "../projectiles/DoubleProjectile.h"
 #include "../Player.h"
 #include <memory>
 

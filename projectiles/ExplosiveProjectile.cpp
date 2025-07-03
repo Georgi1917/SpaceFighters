@@ -26,6 +26,8 @@ void ExplosiveProjectile::Update(float delta)
     }
     else Explode(delta);
 
+    DrawRectangleRec(rect, RED);
+
 }
 
 void ExplosiveProjectile::Explode(float delta)

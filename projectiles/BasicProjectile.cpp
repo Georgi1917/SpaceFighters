@@ -8,4 +8,6 @@ void BasicProjectile::Update(float delta)
     rect.x += direction.x * speed * delta;
     rect.y += direction.y * speed * delta;
 
+    DrawRectangleRec(rect, RED);
+
 }

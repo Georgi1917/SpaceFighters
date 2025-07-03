@@ -4,6 +4,7 @@ spacefighters.exe
 projectiles/Projectile.o
 projectiles/BasicProjectile.o
 projectiles/ExplosiveProjectile.o
+projectiles/DoubleProjectile.o
 enemies/DiveBomber.o
 enemies/Enemy.o
 enemies/DogFighter.o

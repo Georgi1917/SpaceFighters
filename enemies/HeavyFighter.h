@@ -18,6 +18,11 @@ class HeavyFighter : public Enemy
         Vector2 midPoint;
         Vector2 endPoint;
 
+        Vector2 currPoint;
+        Vector2 nextPoint;
+
+        bool hasReachedMidPoint;
+
         float stayTime;
         float countdown;
 
