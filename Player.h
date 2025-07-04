@@ -10,6 +10,7 @@ class Player
 
     public:
         Rectangle rect;
+        Texture2D sprite;
         float health;
         int score;
         float damage;
@@ -19,6 +20,7 @@ class Player
 
         std::unique_ptr<Projectile> Shoot();
         void Move(float delta);
+        Player();
 
     private:
         void CheckOutOfBounds(char axis, Vector2 &dir);

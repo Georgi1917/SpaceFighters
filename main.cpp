@@ -29,20 +29,15 @@ int main()
     int screenWidth = 650;
     int screenHeight = 900;
 
-    Rectangle playerRect = {300, 700, 40, 40};
-    Player player = { 0 };
-    player.rect = playerRect;
-    player.damage = 1;
-    player.health = 1;
-    player.score = 0;
-    player.timerForShooting = 0;
-    player.speed = PLAYER_SPEED;
-    player.hasLost = false;
-
-    Player *p = &player;
-
     std::vector<std::unique_ptr<Projectile>> projectiles;
     std::vector<std::unique_ptr<Enemy>> enemies;
+
+    InitWindow(screenWidth, screenHeight, "Space Fighters");
+    SetTargetFPS(60);
+
+    Player player = Player();
+
+    Player *p = &player;
 
     enemies.push_back(std::make_unique<DiveBomber>(
         Vector2{600, 600}, Vector2{500, -10}
@@ -65,10 +60,6 @@ int main()
         Vector2{230, 910}, Vector2{230, 400}, Vector2{230, -10}
     ));
 
-    InitWindow(screenWidth, screenHeight, "Space Fighters");
-
-    SetTargetFPS(60);
-
     while(!WindowShouldClose() && !player.hasLost) 
     {
 
@@ -86,7 +77,8 @@ int main()
         }
         else if (IsKeyDown(KEY_Z) && player.timerForShooting < 0.1) player.timerForShooting += deltaTime;
 
-        DrawRectangleRec(player.rect, GREEN);
+        DrawRectangleLinesEx(player.rect, 1.0f, GREEN);
+        DrawTextureEx(player.sprite, Vector2{player.rect.x, player.rect.y}, 0.0f, 2.0f, WHITE);
 
         for (auto it = enemies.begin(); it != enemies.end();) 
         {
@@ -155,6 +147,8 @@ int main()
         EndDrawing();
 
     }
+
+    UnloadTexture(player.sprite);
 
     CloseWindow();
 

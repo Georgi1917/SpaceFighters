@@ -1,6 +1,20 @@
 #include "Player.h"
 #include <iostream>
 
+Player::Player()
+{
+
+    sprite =LoadTexture("textures/player/Main Ship - Base - Full health.png");
+    rect = Rectangle{300, 700, (float)sprite.width * 2.0f, (float)sprite.height * 2.0f};
+    health = 1;
+    score = 0;
+    damage = 1;
+    speed = 300.0f;
+    timerForShooting = 0;
+    hasLost = false;
+
+}
+
 void Player::CheckOutOfBounds(char axis, Vector2 &dir) 
 {
 
