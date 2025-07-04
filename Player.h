@@ -11,6 +11,8 @@ class Player
     public:
         Rectangle rect;
         Texture2D sprite;
+        Texture2D engineSprite;
+
         float health;
         int score;
         float damage;
@@ -25,5 +27,12 @@ class Player
     private:
         void CheckOutOfBounds(char axis, Vector2 &dir);
 
+        Rectangle spriteSource;
+        Rectangle engineSource;
+
+        float timerForEngineChange;
+        float frameDelay;
+        int currFrame;
+        int someRandNum;
 
 };

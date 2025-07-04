@@ -76,10 +76,7 @@ int main()
 
         }
         else if (IsKeyDown(KEY_Z) && player.timerForShooting < 0.1) player.timerForShooting += deltaTime;
-
-        DrawRectangleLinesEx(player.rect, 1.0f, GREEN);
-        DrawTextureEx(player.sprite, Vector2{player.rect.x, player.rect.y}, 0.0f, 2.0f, WHITE);
-
+        
         for (auto it = enemies.begin(); it != enemies.end();) 
         {
 
@@ -149,6 +146,7 @@ int main()
     }
 
     UnloadTexture(player.sprite);
+    UnloadTexture(player.engineSprite);
 
     CloseWindow();
 
