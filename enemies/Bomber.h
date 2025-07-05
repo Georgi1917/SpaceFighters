@@ -13,4 +13,10 @@ class Bomber : public Enemy {
 
         Bomber(Vector2 sp, Vector2 ep);
 
+    private:
+        float rotation;
+        Rectangle destRect;
+
+        float GetRotation(float targetAngle, float delta);
+
 };

@@ -1,4 +1,5 @@
 #include "Bomber.h"
+#include <cmath>
 #include <iostream>
 
 Bomber::Bomber(Vector2 sp, Vector2 ep) {
@@ -9,6 +10,7 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
     damage = 2;
     speed = 50.0f;
     shootDelayTimer = 0;
+    rotation = 0.0f;
     color = BLUE;
 
     hasAppeared = false;
@@ -20,7 +22,10 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
 
     velocity = { 0 };
     
-    rect = {spawnPoint.x, spawnPoint.y, 50.0f, 25.0f};
+    sprite = LoadTexture("textures/enemies/Bomber.png");
+    sourceRect = {0, 0, 32, 32};
+    rect = {spawnPoint.x, spawnPoint.y, sourceRect.width * 2.0f, sourceRect.height * 2.0f};
+    destRect = {rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height};
 
 }
 
@@ -46,12 +51,36 @@ void Bomber::Update(float delta)
 
     this->rect.x += velocity.x * speed * delta;
     this->rect.y += velocity.y * speed * delta;
+    this->destRect.x += velocity.x * speed * delta;
+    this->destRect.y += velocity.y * speed * delta;
 
     if (this->rect.x > 0 && 
         this->rect.y > 0 && 
         this->rect.x + this->rect.width < GetScreenWidth() &&
         this->rect.y + this->rect.height < GetScreenHeight()) hasAppeared = true;
 
+    float targetAngle = atan2f(velocity.y, velocity.x) * (180.0f / PI) - 90.0f;
+
+    rotation = GetRotation(targetAngle, delta);
+
+    DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2, destRect.height / 2}, rotation, WHITE);
     DrawRectangleLinesEx(rect, 1.0f, color);
+    DrawRectangleLinesEx(destRect, 1.0f, BLACK);
+
+}
+
+float Bomber::GetRotation(float targetAngle, float delta)
+{
+
+    float turnSpeed = 90.0f;
+    float angleDiff = targetAngle - rotation;
+
+    if (angleDiff > 90.0f) angleDiff -= 360.0f;
+    if (angleDiff < -90.0f) angleDiff += 360.0f;
+
+    if (fabs(angleDiff) < turnSpeed * delta) rotation = targetAngle;
+    else rotation += (angleDiff > 1 ? 1 : -1) * turnSpeed * delta;
+
+    return rotation;
 
 }

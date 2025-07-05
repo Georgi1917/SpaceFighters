@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-DiveBomber::DiveBomber(Vector2 fp, Vector2 swp) 
+DiveBomber::DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp) 
 {
 
     srand((unsigned) time(NULL));
@@ -11,17 +11,26 @@ DiveBomber::DiveBomber(Vector2 fp, Vector2 swp)
     damage = 1;
     speed = 80.0f;
     randNum = GenerateRandNum();
+    rotation = 0.0f;
     color = PURPLE;
 
     shootDelayTimer = 0.0f;
 
-    finalPos = fp;
-    spawnPoints = swp;
+    finalPoint = fp;
+    midPoint = mp;
+    spawnPoint = swp;
+
+    currPoint = spawnPoint;
+    nextPoint = midPoint;
 
     velocity = { 0 };
 
     hasAppeared = false;
-    rect = {spawnPoints.x, spawnPoints.y, 20.0f, 20.0f};
+
+    sprite = LoadTexture("textures/enemies/DiveBomber.png");
+    sourceRect = {0, 0, 32, 16};
+    rect = {spawnPoint.x, spawnPoint.y, (float)sourceRect.width * 1.8f, (float)sourceRect.height * 1.8f};
+    destRect = {rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height};
 
 }
 
@@ -43,31 +52,47 @@ std::unique_ptr<Projectile> DiveBomber::Shoot(float delta, Player* player)
 void DiveBomber::Update(float delta) 
 {
 
-    velocity = Normalize({this->finalPos.x - this->spawnPoints.x, this->finalPos.y - this->spawnPoints.y});
-
     float tolerance = 1.0f;
 
-    if (fabs(this->rect.x - this->finalPos.x) < tolerance &&
-        fabs(this->rect.y - this->finalPos.y) < tolerance) {
+    if (fabs(this->rect.x - this->nextPoint.x) < tolerance &&
+        fabs(this->rect.y - this->nextPoint.y) < tolerance) 
+    {
 
+        currPoint = midPoint;
+        nextPoint = finalPoint;
         hasAppeared = true;
 
     }
 
-    if (!hasAppeared) {
+    velocity = Normalize({this->nextPoint.x - this->currPoint.x, this->nextPoint.y - this->currPoint.y});
 
-        this->rect.x += velocity.x * speed * delta;
-        this->rect.y += velocity.y * speed * delta;
+    this->rect.x += velocity.x * speed * delta;
+    this->rect.y += velocity.y * speed * delta;
+    this->destRect.x += velocity.x * speed * delta;
+    this->destRect.y += velocity.y * speed * delta;
 
-    }
+    float targetAngle = atan2f(velocity.y, velocity.x) * (180.0f / PI) - 90.0f;
 
-    if (hasAppeared) {
+    rotation = GetRotation(targetAngle, delta);
 
-        this->rect.x += velocity.x * speed * delta;
-        this->rect.y -= velocity.y * speed * delta;
-
-    }
-
+    DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2.0f, destRect.height / 2.0f}, rotation, WHITE);
     DrawRectangleLinesEx(rect, 1.0f, color);
+    DrawRectangleLinesEx(destRect, 1.0f, BLACK);
+
+}
+
+float DiveBomber::GetRotation(float targetAngle, float delta)
+{
+
+    float turnSpeed = 90.0f;
+    float angleDiff = targetAngle - rotation;
+
+    if (angleDiff > 90.0f) angleDiff -= 360.0f;
+    if (angleDiff < -90.0f) angleDiff += 360.0f;
+
+    if (fabs(angleDiff) < turnSpeed * delta) rotation = targetAngle;
+    else rotation += (angleDiff > 1 ? 1 : -1) * turnSpeed * delta;
+
+    return rotation;
 
 }

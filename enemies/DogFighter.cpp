@@ -5,8 +5,6 @@
 DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
 {
 
-    std::cout << "HELLOOOOO" << "\n";
-
     srand((unsigned) time(NULL));
 
     health = 1;
