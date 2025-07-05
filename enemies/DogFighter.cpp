@@ -24,6 +24,10 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
 
     hasAppeared = false;
 
+    timerForSpriteChange = 0.0f;
+    frameDelay = 0.05f;
+    currFrame = 0;
+
     sprite = LoadTexture("textures/enemies/DogFighter.png");
     sourceRect = {0, 0, 16, 16};
     rect = {setPoints.x, setPoints.y, (float)sourceRect.width * 1.8f, (float)sourceRect.height * 1.8f};
@@ -72,6 +76,17 @@ void DogFighter::Update(float delta)
     float targetAngle = atan2f(velocity.y, velocity.x) * (180.0f / PI) - 90.0f;
 
     rotation = GetRotation(targetAngle, delta);
+
+    timerForSpriteChange += delta;
+
+    if (timerForSpriteChange >= frameDelay)
+    {
+
+        timerForSpriteChange = 0.0f;
+        currFrame = (currFrame + 1) % 2;
+        sourceRect.x = currFrame * 16;
+
+    }
 
     DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2, destRect.height / 2}, rotation, WHITE);
     DrawRectangleLinesEx(rect, 1.0f, RED);

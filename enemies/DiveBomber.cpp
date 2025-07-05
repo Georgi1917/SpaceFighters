@@ -27,6 +27,10 @@ DiveBomber::DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp)
 
     hasAppeared = false;
 
+    timerForSpriteChange = 0.0f;
+    frameDelay = 0.05f;
+    currFrame = 0;
+
     sprite = LoadTexture("textures/enemies/DiveBomber.png");
     sourceRect = {0, 0, 32, 16};
     rect = {spawnPoint.x, spawnPoint.y, (float)sourceRect.width * 1.8f, (float)sourceRect.height * 1.8f};
@@ -74,6 +78,17 @@ void DiveBomber::Update(float delta)
     float targetAngle = atan2f(velocity.y, velocity.x) * (180.0f / PI) - 90.0f;
 
     rotation = GetRotation(targetAngle, delta);
+
+    timerForSpriteChange += delta;
+
+    if (timerForSpriteChange >= frameDelay)
+    {
+
+        timerForSpriteChange = 0.0f;
+        currFrame = (currFrame + 1) % 2;
+        sourceRect.x = currFrame * 32;
+
+    }
 
     DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2.0f, destRect.height / 2.0f}, rotation, WHITE);
     DrawRectangleLinesEx(rect, 1.0f, color);

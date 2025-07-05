@@ -33,5 +33,10 @@ class Enemy
         float Length(Vector2 vec) const;
         Vector2 Normalize(Vector2 vec) const;
         int GenerateRandNum();
+        
+    protected:
+        float timerForSpriteChange;
+        float frameDelay;
+        int currFrame;
 
 };

@@ -33,6 +33,5 @@ class Player
         float timerForEngineChange;
         float frameDelay;
         int currFrame;
-        int someRandNum;
 
 };

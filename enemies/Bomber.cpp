@@ -21,6 +21,10 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
     endPoint = ep;
 
     velocity = { 0 };
+
+    timerForSpriteChange = 0.0f;
+    currFrame = 0;
+    frameDelay = 0.05f;
     
     sprite = LoadTexture("textures/enemies/Bomber.png");
     sourceRect = {0, 0, 32, 32};
@@ -62,6 +66,17 @@ void Bomber::Update(float delta)
     float targetAngle = atan2f(velocity.y, velocity.x) * (180.0f / PI) - 90.0f;
 
     rotation = GetRotation(targetAngle, delta);
+
+    timerForSpriteChange += delta;
+
+    if (timerForSpriteChange >= frameDelay) 
+    {
+
+        timerForSpriteChange = 0.0f;
+        currFrame = (currFrame + 1) % 2;
+        sourceRect.x = currFrame * 32;
+
+    }
 
     DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2, destRect.height / 2}, rotation, WHITE);
     DrawRectangleLinesEx(rect, 1.0f, color);
