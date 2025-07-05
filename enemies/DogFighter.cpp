@@ -5,11 +5,14 @@
 DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
 {
 
+    std::cout << "HELLOOOOO" << "\n";
+
     srand((unsigned) time(NULL));
 
     health = 1;
     damage = 1;
     speed = 50.0f;
+    rotation = 0.0f;
     randNum = GenerateRandNum();
     color = RED;
 
@@ -22,7 +25,11 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
     velocity = { 0 };
 
     hasAppeared = false;
-    rect = {setPoints.x, setPoints.y, 10.0f, 10.0f};
+
+    sprite = LoadTexture("textures/enemies/DogFighter.png");
+    sourceRect = {0, 0, 16, 16};
+    rect = {setPoints.x, setPoints.y, (float)sourceRect.width * 1.8f, (float)sourceRect.height * 1.8f};
+    destRect = {rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height};
 
 }
 
@@ -61,6 +68,32 @@ void DogFighter::Update(float delta)
 
     this->rect.x += velocity.x * speed * delta;
     this->rect.y += velocity.y * speed * delta;
+    this->destRect.x += velocity.x * speed * delta;
+    this->destRect.y += velocity.y * speed * delta;
+
+    float targetAngle = atan2f(velocity.y, velocity.x) * (180.0f / PI) - 90.0f;
+
+    rotation = GetRotation(targetAngle, delta);
+
+    DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2, destRect.height / 2}, rotation, WHITE);
+    DrawRectangleLinesEx(rect, 1.0f, RED);
+    DrawRectangleLinesEx(destRect, 1.0f, BLACK);
+
+}
+
+float DogFighter::GetRotation(float targetAngle, float delta)
+{
+
+    float turnSpeed = 120.0f;
+    float angleDiff = targetAngle - rotation;
+
+    if (angleDiff > 120.0f) angleDiff -= 360.0f;
+    if (angleDiff < -120.0f) angleDiff += 360.0f;
+
+    if (fabs(angleDiff) < turnSpeed * delta) rotation = targetAngle;
+    else rotation += (angleDiff > 1 ? 1 : -1) * turnSpeed * delta;
+
+    return rotation;
 
 }
 

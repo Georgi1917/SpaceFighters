@@ -17,4 +17,10 @@ class DogFighter : public Enemy
         std::unique_ptr<Projectile> Shoot(float delta, Player* player) override;
         void Update(float delta) override;
 
+    private:
+        Rectangle destRect;
+        float rotation;
+
+        float GetRotation(float targetAngle, float delta);
+
 };

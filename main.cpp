@@ -48,16 +48,21 @@ int main()
     enemies.push_back(std::make_unique<DiveBomber>(
         Vector2{400, 600}, Vector2{300, -10}
     ));
-    enemies.push_back(std::make_unique<DogFighter>(
-        Vector2{-50, 600}, std::vector<Vector2>{
-            {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
-        }
-    ));
     enemies.push_back(std::make_unique<Bomber>(
         Vector2{-10, 320}, Vector2{(float) GetScreenWidth() + 20, 320}
     ));
     enemies.push_back(std::make_unique<HeavyFighter>(
         Vector2{230, 910}, Vector2{230, 400}, Vector2{230, -10}
+    ));
+    enemies.push_back(std::make_unique<DogFighter>(
+        Vector2{-50, 600}, std::vector<Vector2>{
+            {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
+        }
+    ));
+    enemies.push_back(std::make_unique<DogFighter>(
+        Vector2{(float)GetScreenWidth() + 10, 200}, std::vector<Vector2>{
+            {600, 230}, {590, 280}, {590, 340}, {450, 340}, {320, 500}, {-10, 350}
+        }
     ));
 
     while(!WindowShouldClose() && !player.hasLost) 
@@ -115,7 +120,6 @@ int main()
 
             }
 
-            DrawRectangleRec((*it)->rect, (*it)->color);
             ++it;
 
         }
@@ -143,6 +147,11 @@ int main()
 
         EndDrawing();
 
+    }
+
+    for (auto it = enemies.begin(); it != enemies.end(); it++)
+    {
+        UnloadTexture((*it)->sprite);
     }
 
     UnloadTexture(player.sprite);

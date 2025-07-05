@@ -68,4 +68,6 @@ void DiveBomber::Update(float delta)
 
     }
 
+    DrawRectangleLinesEx(rect, 1.0f, color);
+
 }

@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include <cmath>
 #include <random>
+#include <iostream>
 
 bool Enemy::CheckForOutOfBounds()
 {

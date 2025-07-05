@@ -52,4 +52,6 @@ void Bomber::Update(float delta)
         this->rect.x + this->rect.width < GetScreenWidth() &&
         this->rect.y + this->rect.height < GetScreenHeight()) hasAppeared = true;
 
+    DrawRectangleLinesEx(rect, 1.0f, color);
+
 }

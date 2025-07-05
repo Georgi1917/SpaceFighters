@@ -13,8 +13,9 @@ class Enemy
 
     public:
 
-        Rectangle rect;
         Texture2D sprite;
+        Rectangle sourceRect;
+        Rectangle rect;
         Vector2 velocity;
         Color color;
         int health;
