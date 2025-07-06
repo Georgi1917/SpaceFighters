@@ -86,11 +86,12 @@ void Player::Move(float delta)
 std::unique_ptr<Projectile> Player::Shoot() 
 {
 
-    Rectangle projRect;
-    projRect.width = 5;
-    projRect.height = 10;
-    projRect.x = (this->rect.x + this->rect.width / 2) - projRect.width / 2;
-    projRect.y = this->rect.y - this->rect.height / 2; 
+    Rectangle sourceRect = {0, 0, 16, 16};
+    Rectangle projRect = {
+        (rect.x + rect.width / 2) - sourceRect.width / 2,
+        rect.y - sourceRect.height,
+        sourceRect.width, sourceRect.height
+    }; 
 
     return std::make_unique<BasicProjectile>(projRect, Vector2{0, -1}, 800.0f, false);
 

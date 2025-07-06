@@ -19,6 +19,11 @@ class Projectile
 
     bool CheckOutOfBounds();
     bool operator==(const Projectile &other) const;
+    void LoadTextures();
     Projectile(Rectangle r, Vector2 dir, float s, bool enemy);
+
+    protected:
+        Rectangle sourceRect;
+        Texture2D basicProjectileSprite;
     
 };
