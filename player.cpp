@@ -8,7 +8,7 @@ Player::Player()
     engineSprite = LoadTexture("textures/player/Boosters (16 x 16).png");
     spriteSource = Rectangle{16, 0, 16, 16};
     engineSource = Rectangle{0, 0, 16, 16};
-    rect = Rectangle{300, 700, (float)sprite.width * 1.5f, (float)sprite.height * 4};
+    rect = Rectangle{300, 700, spriteSource.width * 3.4f, spriteSource.height * 3.4f};
 
     health = 1;
     score = 0;
@@ -77,8 +77,8 @@ void Player::Move(float delta)
     DrawRectangleLinesEx(rect, 1.0f, GREEN);
     DrawTexturePro(sprite, spriteSource, rect, Vector2{0, 0}, 0.0f, WHITE);
     DrawTexturePro(engineSprite, engineSource, 
-                   Rectangle{(rect.x + (sprite.width - engineSprite.width) / 2.0f) + 3.5f, 
-                              rect.y + rect.height, (float)engineSprite.width * 1.5f, (float)engineSprite.height * 3.0f}, 
+                   Rectangle{(rect.x + rect.width / 2.0f) - engineSource.width - 6, 
+                              rect.y + rect.height, engineSource.width * 2.8f, engineSource.height * 2.8f}, 
                    Vector2{0, 0}, 0.0f, WHITE);
 
 }
