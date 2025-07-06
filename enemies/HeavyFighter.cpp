@@ -30,8 +30,8 @@ HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep)
     currFrame = 0;
     frameDelay = 0.05f;
 
-    sprite = LoadTexture("textures/enemies/HeavyFighter.png");
-    engineSprite = LoadTexture("textures/enemies/HeavyFighterEngine.png");
+    sprite = HeavyFighterSprite;
+    engineSprite = HeavyFighterEngineSprite;
     sourceRect = {0, 0, 77, 103};
     engineSource = {0, 0, 128, 50};
     rect = {spawnPoint.x, spawnPoint.y, sourceRect.width, sourceRect.height};

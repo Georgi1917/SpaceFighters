@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../include/raylib.h"
+#include "../utils/LoadSprites.h"
 
 class Projectile 
 {
@@ -19,11 +20,13 @@ class Projectile
 
     bool CheckOutOfBounds();
     bool operator==(const Projectile &other) const;
-    void LoadTextures();
     Projectile(Rectangle r, Vector2 dir, float s, bool enemy);
 
     protected:
         Rectangle sourceRect;
-        Texture2D basicProjectileSprite;
+
+        float frameDelay;
+        int currFrame;
+        float timerForSpriteChange;
     
 };

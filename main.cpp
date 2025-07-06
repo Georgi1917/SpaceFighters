@@ -1,4 +1,5 @@
 #include "include/raylib.h"
+#include "utils/LoadSprites.h"
 #include "Player.h"
 #include "projectiles/Projectile.h"
 #include "projectiles/BasicProjectile.h"
@@ -34,6 +35,8 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
     SetTargetFPS(60);
+
+    LoadSprites();
 
     Texture2D background = LoadTexture("textures/background/background.png");
     background.width = screenWidth;
@@ -82,14 +85,15 @@ int main()
         float deltaTime = GetFrameTime();
         player.Move(deltaTime);
 
-        if (IsKeyDown(KEY_Z) && player.timerForShooting >= 0.1) 
+        if (IsKeyDown(KEY_Z) && player.timerForShooting >= 0.2f) 
         {
 
             projectiles.push_back(player.Shoot());
             player.timerForShooting = 0;
 
         }
-        else if (IsKeyDown(KEY_Z) && player.timerForShooting < 0.1) player.timerForShooting += deltaTime;
+        else if (IsKeyDown(KEY_Z) && player.timerForShooting < 0.2f) player.timerForShooting += deltaTime;
+        else player.timerForShooting = 0;
         
         for (auto it = enemies.begin(); it != enemies.end();) 
         {
@@ -163,9 +167,7 @@ int main()
         UnloadTexture((*it)->sprite);
     }
 
-    UnloadTexture(player.sprite);
-    UnloadTexture(player.engineSprite);
-    UnloadTexture(background);
+    UnloadSprites();
 
     CloseWindow();
 

@@ -26,7 +26,7 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
     currFrame = 0;
     frameDelay = 0.05f;
     
-    sprite = LoadTexture("textures/enemies/Bomber.png");
+    sprite = bomberSprite;
     sourceRect = {0, 0, 32, 32};
     rect = {spawnPoint.x, spawnPoint.y, sourceRect.width * 2.0f, sourceRect.height * 2.0f};
     destRect = {rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height};

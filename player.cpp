@@ -4,8 +4,8 @@
 Player::Player()
 {
 
-    sprite = LoadTexture("textures/player/Player_ship (16 x 16).png");
-    engineSprite = LoadTexture("textures/player/Boosters (16 x 16).png");
+    sprite = playerSprite;
+    engineSprite = playerEngineSprite;
     spriteSource = Rectangle{16, 0, 16, 16};
     engineSource = Rectangle{0, 0, 16, 16};
     rect = Rectangle{300, 700, spriteSource.width * 3.4f, spriteSource.height * 3.4f};
@@ -88,11 +88,11 @@ std::unique_ptr<Projectile> Player::Shoot()
 
     Rectangle sourceRect = {0, 0, 16, 16};
     Rectangle projRect = {
-        (rect.x + rect.width / 2) - sourceRect.width / 2,
-        rect.y - sourceRect.height,
-        sourceRect.width, sourceRect.height
+        (rect.x + rect.width / 2) - (sourceRect.width * 3.0f) / 2,
+        rect.y - sourceRect.height * 3.0f,
+        sourceRect.width * 3.0f, sourceRect.height * 3.0f
     }; 
 
-    return std::make_unique<BasicProjectile>(projRect, Vector2{0, -1}, 800.0f, false);
+    return std::make_unique<PlayerProjectile>(projRect, Vector2{0, -1}, 800.0f, false);
 
 }

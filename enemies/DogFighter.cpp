@@ -28,7 +28,7 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
     frameDelay = 0.05f;
     currFrame = 0;
 
-    sprite = LoadTexture("textures/enemies/DogFighter.png");
+    sprite = DogFighterSprite;
     sourceRect = {0, 0, 16, 16};
     rect = {setPoints.x, setPoints.y, (float)sourceRect.width * 1.8f, (float)sourceRect.height * 1.8f};
     destRect = {rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height};
@@ -38,11 +38,12 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
 std::unique_ptr<Projectile> DogFighter::Shoot(float delta, Player* player)
 {
 
-    Rectangle projRect;
-    projRect.width = 8;
-    projRect.height = 8;
-    projRect.x = (this->rect.x + this->rect.width / 2) - projRect.width / 2;
-    projRect.y = this->rect.y + this->rect.height + 10; 
+    Rectangle projSourceRect = {0, 0, 16, 16};
+    Rectangle projRect = {
+        (this->rect.x + this->rect.width / 2) - (sourceRect.width * 2.0f) / 2,
+        this->rect.y + this->rect.height + 10,
+        projSourceRect.width * 2.0f, projSourceRect.height * 2.0f
+    };
 
     Vector2 dir = Normalize({(player->rect.x + player->rect.width / 2) - projRect.x, player->rect.y - projRect.y});
 

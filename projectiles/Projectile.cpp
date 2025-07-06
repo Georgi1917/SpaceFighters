@@ -31,8 +31,3 @@ bool Projectile::operator==(const Projectile& other) const
     return id == other.id;
     
 }
-
-void Projectile::LoadTextures()
-{
-    basicProjectileSprite = LoadTexture("textures/player_projectiles/player_proj1.png");
-}

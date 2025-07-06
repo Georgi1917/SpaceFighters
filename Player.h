@@ -1,7 +1,8 @@
 #pragma once
 #include "include/raylib.h"
+#include "utils/LoadSprites.h"
 #include "projectiles/Projectile.h"
-#include "projectiles/BasicProjectile.h"
+#include "projectiles/PlayerProjectile.h"
 #include <memory>
 
 
