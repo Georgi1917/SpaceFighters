@@ -21,6 +21,10 @@ class HeavyFighter : public Enemy
         Vector2 currPoint;
         Vector2 nextPoint;
 
+        Texture2D engineSprite;
+        Rectangle engineSource;
+        Rectangle engineDest;
+
         bool hasReachedMidPoint;
 
         float stayTime;

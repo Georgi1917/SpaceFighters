@@ -26,7 +26,15 @@ HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep)
     currPoint = spawnPoint;
     nextPoint = midPoint;
 
-    rect = {spawnPoint.x, spawnPoint.y, 30.0f, 60.0f};
+    timerForSpriteChange = 0.0f;
+    currFrame = 0;
+    frameDelay = 0.05f;
+
+    sprite = LoadTexture("textures/enemies/HeavyFighter.png");
+    engineSprite = LoadTexture("textures/enemies/HeavyFighterEngine.png");
+    sourceRect = {0, 0, 77, 103};
+    engineSource = {0, 0, 128, 50};
+    rect = {spawnPoint.x, spawnPoint.y, sourceRect.width, sourceRect.height};
 
 }
 
@@ -73,6 +81,22 @@ void HeavyFighter::Update(float delta)
 
     }
 
+    engineDest = {(rect.x + rect.width / 2) - engineSource.width / 2, (rect.y + rect.height) - engineSource.height / 1.38f, engineSource.width, engineSource.height};
+
+    timerForSpriteChange += delta;
+    if (timerForSpriteChange >= frameDelay)
+    {
+
+        timerForSpriteChange = 0.0f;
+        currFrame = (currFrame + 1) % 8;
+        engineSource.x = currFrame * 128;
+
+    }
+
+    DrawTexturePro(sprite, sourceRect, rect, Vector2{0, 0}, 0.0f, WHITE);
+    DrawTexturePro(engineSprite, engineSource, engineDest, Vector2{0, 0}, 0.0f, WHITE);
+
     DrawRectangleLinesEx(rect, 1.0f, color);
+    DrawRectangleLinesEx(Rectangle{rect.x, rect.y + rect.height, engineSource.width, engineSource.height}, 1.0f, BLACK);
 
 }

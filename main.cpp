@@ -54,9 +54,9 @@ int main()
     enemies.push_back(std::make_unique<Bomber>(
         Vector2{700, 200}, Vector2{-10, 500}
     ));
-    // enemies.push_back(std::make_unique<HeavyFighter>(
-    //     Vector2{230, 910}, Vector2{230, 400}, Vector2{230, -10}
-    // ));
+    enemies.push_back(std::make_unique<HeavyFighter>(
+        Vector2{230, 910}, Vector2{230, 400}, Vector2{230, -10}
+    ));
     enemies.push_back(std::make_unique<DogFighter>(
         Vector2{-50, 600}, std::vector<Vector2>{
             {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
