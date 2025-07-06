@@ -35,6 +35,10 @@ int main()
     InitWindow(screenWidth, screenHeight, "Space Fighters");
     SetTargetFPS(60);
 
+    Texture2D background = LoadTexture("textures/background/background.png");
+    background.width = screenWidth;
+    background.height = screenHeight;
+
     Player player = Player();
 
     Player *p = &player;
@@ -64,7 +68,7 @@ int main()
     ));
     enemies.push_back(std::make_unique<DogFighter>(
         Vector2{(float)GetScreenWidth() + 10, 200}, std::vector<Vector2>{
-            {600, 230}, {590, 280}, {590, 340}, {450, 340}, {320, 500}, {-10, 350}
+            {600, 230}, {590, 280}, {590, 340}, {450, 340}, {320, 500}, {-30, 350}
         }
     ));
 
@@ -72,6 +76,8 @@ int main()
     {
 
         BeginDrawing();
+
+        DrawTexture(background, 0, 0, WHITE);
 
         float deltaTime = GetFrameTime();
         player.Move(deltaTime);
@@ -159,6 +165,7 @@ int main()
 
     UnloadTexture(player.sprite);
     UnloadTexture(player.engineSprite);
+    UnloadTexture(background);
 
     CloseWindow();
 
