@@ -34,23 +34,25 @@ HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep)
     engineSprite = HeavyFighterEngineSprite;
     sourceRect = {0, 0, 77, 103};
     engineSource = {0, 0, 128, 50};
-    rect = {spawnPoint.x, spawnPoint.y, sourceRect.width, sourceRect.height};
+    rect = {spawnPoint.x, spawnPoint.y, sourceRect.width * 1.8f, sourceRect.height * 1.8f};
 
 }
 
 std::unique_ptr<Projectile> HeavyFighter::Shoot(float delta, Player* player)
 {
 
-    Rectangle projRect{ (this->rect.x + this->rect.width / 3) - 4, 
-                        (this->rect.y + this->rect.height) + 10,
-                        8, 8 };
-    Rectangle projRect2{ ((this->rect.x + this->rect.width) - this->rect.width / 3) - 4, 
-                         (this->rect.y + this->rect.height) + 10, 
-                         8, 8 };
+    Rectangle projSourceRect = {0, 0, 32, 32};
+
+    Rectangle projRect{ this->rect.x, 
+                        this->rect.y + this->rect.height,
+                        projSourceRect.width, projSourceRect.height};
+    Rectangle projRect2{ (this->rect.x + this->rect.width) - projSourceRect.width, 
+                         this->rect.y + this->rect.height, 
+                         projSourceRect.width, projSourceRect.height};
 
     Vector2 dir = { 0, 1 };
 
-    return std::make_unique<DoubleProjectile>(projRect, dir, 80.0f, true, projRect2);
+    return std::make_unique<DoubleProjectile>(projRect, dir, 80.0f, true, projRect2, player);
 
 }
 
@@ -81,7 +83,9 @@ void HeavyFighter::Update(float delta)
 
     }
 
-    engineDest = {(rect.x + rect.width / 2) - engineSource.width / 2, (rect.y + rect.height) - engineSource.height / 1.38f, engineSource.width, engineSource.height};
+    engineDest = {(rect.x + rect.width / 2) - (engineSource.width * 1.8f) / 2, 
+                  (rect.y + rect.height) - (engineSource.height * 1.8f) / 1.38f, 
+                  engineSource.width * 1.8f, engineSource.height * 1.8f};
 
     timerForSpriteChange += delta;
     if (timerForSpriteChange >= frameDelay)
