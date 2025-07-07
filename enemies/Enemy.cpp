@@ -52,15 +52,23 @@ int Enemy::GenerateRandNum() {
 void Enemy::Die(float delta)
 {
 
-    timerForDeathSpriteChange += delta;
-    
-    if (timerForDeathSpriteChange >= frameDelay)
+    if (currDeathFrame < numOfFrames - 1)
     {
 
-        timerForDeathSpriteChange = 0.0f;
-        currDeathFrame = (currDeathFrame + 1) % numOfFrames;
-        deathSourceRect.x = currDeathFrame * frameWidth;
+        timerForDeathSpriteChange += delta;
+
+        if (timerForDeathSpriteChange >= deathFrameDelay)
+        {
+
+            timerForDeathSpriteChange = 0.0f;
+            currDeathFrame += 1;
+            deathSourceRect.x = currDeathFrame * frameWidth;
+
+        }
+
+        DrawTexturePro(deathSprite, deathSourceRect, rect, Vector2{0, 0}, 0.0f, WHITE);
 
     }
+    else hasDied = true;
 
 }

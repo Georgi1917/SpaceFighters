@@ -16,6 +16,7 @@ HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep)
 
     hasAppeared = false;
     hasReachedMidPoint = false;
+    hasDied = false;
 
     velocity = { 0 };
 
@@ -30,10 +31,18 @@ HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep)
     currFrame = 0;
     frameDelay = 0.05f;
 
+    timerForDeathSpriteChange = 0.0f;
+    currDeathFrame = 0;
+    frameWidth = 128;
+    numOfFrames = 12;
+    deathFrameDelay = 0.08f;
+
+    deathSprite = HeavyFighterDeathSprite;
     sprite = HeavyFighterSprite;
     engineSprite = HeavyFighterEngineSprite;
     sourceRect = {0, 0, 77, 103};
     engineSource = {0, 0, 128, 50};
+    deathSourceRect = {0, 0, 128, 128};
     rect = {spawnPoint.x, spawnPoint.y, sourceRect.width * 1.8f, sourceRect.height * 1.8f};
 
 }
@@ -58,6 +67,8 @@ std::unique_ptr<Projectile> HeavyFighter::Shoot(float delta, Player* player)
 
 void HeavyFighter::Update(float delta)
 {
+
+    if (health <= 0) return;
 
     float tolerance = 1.0f;
 

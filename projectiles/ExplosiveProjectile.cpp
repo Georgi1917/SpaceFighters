@@ -92,7 +92,7 @@ void ExplosiveProjectile::Explode(float delta)
         if (CheckCollisionRecs(player->rect, explosionDestRect))
         {
 
-            player->hasLost = true;
+            player->Die(delta);
 
         }
 

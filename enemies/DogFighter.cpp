@@ -23,13 +23,22 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
     velocity = { 0 };
 
     hasAppeared = false;
+    hasDied = false;
+
+    timerForDeathSpriteChange = 0.0f;
+    frameWidth = 48;
+    numOfFrames = 8;
+    currDeathFrame = 0;
+    deathFrameDelay = 0.08f;
 
     timerForSpriteChange = 0.0f;
     frameDelay = 0.05f;
     currFrame = 0;
 
     sprite = DogFighterSprite;
+    deathSprite = SecondDeathSprite;
     sourceRect = {0, 0, 16, 16};
+    deathSourceRect = {0, 0, 48, 48};
     rect = {setPoints.x, setPoints.y, (float)sourceRect.width * 1.8f, (float)sourceRect.height * 1.8f};
     destRect = {rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height};
 
@@ -53,6 +62,8 @@ std::unique_ptr<Projectile> DogFighter::Shoot(float delta, Player* player)
 
 void DogFighter::Update(float delta)
 {
+
+    if (health <= 0) return;
 
     float tolerance = 1.0f;
 

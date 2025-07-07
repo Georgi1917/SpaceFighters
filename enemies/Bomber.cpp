@@ -14,6 +14,7 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
     color = BLUE;
 
     hasAppeared = false;
+    hasDied = false;
 
     randNum = GenerateRandNum();
 
@@ -22,12 +23,20 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
 
     velocity = { 0 };
 
+    timerForDeathSpriteChange = 0.0f;
+    frameWidth = 48;
+    currDeathFrame = 0;
+    deathFrameDelay = 0.08f;
+    numOfFrames = 7;
+
     timerForSpriteChange = 0.0f;
     currFrame = 0;
     frameDelay = 0.05f;
     
     sprite = bomberSprite;
+    deathSprite = FirstDeathSprite;
     sourceRect = {0, 0, 32, 32};
+    deathSourceRect = {0, 0, 48, 48};
     rect = {spawnPoint.x, spawnPoint.y, sourceRect.width * 2.0f, sourceRect.height * 2.0f};
     destRect = {rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height};
 
@@ -51,6 +60,8 @@ std::unique_ptr<Projectile> Bomber::Shoot(float delta, Player* player)
 
 void Bomber::Update(float delta)
 {
+
+    if (health <= 0) return;
 
     velocity = Normalize({this->endPoint.x - this->spawnPoint.x, this->endPoint.y - this->spawnPoint.y});
 

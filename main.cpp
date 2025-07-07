@@ -91,7 +91,6 @@ int main()
         DrawTexture(background, 0, -background.height + (int)bgScrollY, WHITE);
         DrawTexture(background, 0, (int)bgScrollY, WHITE);
 
-
         player.Move(deltaTime);
 
         if (IsKeyDown(KEY_Z) && player.timerForShooting >= 0.2f) 
@@ -109,7 +108,7 @@ int main()
 
             (*it)->Update(deltaTime);
 
-            if (CheckCollisionRecs((*it)->rect, player.rect)) player.hasLost = true;
+            if (CheckCollisionRecs((*it)->rect, player.rect)) player.Die(deltaTime);
 
             if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5) 
             {
@@ -134,7 +133,22 @@ int main()
 
             }
 
-            if ((*it)->health <= 0 || ((*it)->CheckForOutOfBounds() && (*it)->hasAppeared))
+            if ((*it)->health <= 0)
+            {
+
+                (*it)->Die(deltaTime);
+
+                if ((*it)->hasDied) 
+                {
+                    
+                    it = enemies.erase(it);
+                    continue;
+
+                }
+
+            }
+
+            if (((*it)->CheckForOutOfBounds() && (*it)->hasAppeared))
             {
 
                 it = enemies.erase(it);
@@ -151,7 +165,7 @@ int main()
 
             (*proj)->Update(deltaTime);
 
-            if (CheckCollisionRecs((*proj)->rect, player.rect) && (*proj)->isEnemy) player.hasLost = true;
+            if (CheckCollisionRecs((*proj)->rect, player.rect) && (*proj)->isEnemy) player.Die(deltaTime);
 
             if ((*proj)->CheckOutOfBounds() || (*proj)->toBeDeleted)
             {

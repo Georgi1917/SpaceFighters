@@ -26,13 +26,22 @@ DiveBomber::DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp)
     velocity = { 0 };
 
     hasAppeared = false;
+    hasDied = false;
+
+    timerForDeathSpriteChange = 0.0f;
+    currDeathFrame = 0;
+    frameWidth = 48;
+    numOfFrames = 8;
+    deathFrameDelay = 0.08f;
 
     timerForSpriteChange = 0.0f;
     frameDelay = 0.05f;
     currFrame = 0;
 
     sprite = diveBomberSprite;
+    deathSprite = SecondDeathSprite;
     sourceRect = {0, 0, 32, 16};
+    deathSourceRect = {0, 0, 48, 48};
     rect = {spawnPoint.x, spawnPoint.y, (float)sourceRect.width * 1.8f, (float)sourceRect.height * 1.8f};
     destRect = {rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height};
 
@@ -56,6 +65,8 @@ std::unique_ptr<Projectile> DiveBomber::Shoot(float delta, Player* player)
 
 void DiveBomber::Update(float delta) 
 {
+
+    if (health <= 0) return;
 
     float tolerance = 1.0f;
 

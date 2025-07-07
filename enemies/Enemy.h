@@ -21,6 +21,7 @@ class Enemy
         float speed;
         float shootDelayTimer;
         bool hasAppeared;
+        bool hasDied;
         int randNum;
 
         std::unique_ptr<Projectile> virtual Shoot(float delta, Player* player) = 0;
@@ -45,6 +46,7 @@ class Enemy
         int numOfFrames;
         int frameWidth;
         int currDeathFrame;
+        float deathFrameDelay;
         float timerForDeathSpriteChange;
 
         float timerForSpriteChange;

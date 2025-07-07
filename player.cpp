@@ -6,8 +6,10 @@ Player::Player()
 
     sprite = playerSprite;
     engineSprite = playerEngineSprite;
+    deathSprite = SecondDeathSprite;
     spriteSource = Rectangle{16, 0, 16, 16};
     engineSource = Rectangle{0, 0, 16, 16};
+    deathSourceRect = {0, 0, 48, 48};
     rect = Rectangle{300, 700, spriteSource.width * 3.4f, spriteSource.height * 3.4f};
 
     health = 1;
@@ -20,7 +22,14 @@ Player::Player()
     currFrame = 0;
     frameDelay = 0.05f;
 
+    timerForDeathSpriteChange = 0.0f;
+    currDeathFrame = 0;
+    frameWidth = 48;
+    frameDelay = 0.08f;
+    numOfFrames = 8;
+
     hasLost = false;
+    hasBeenHit = false;
 
 }
 
@@ -48,6 +57,8 @@ void Player::CheckOutOfBounds(char axis, Vector2 &dir)
 
 void Player::Move(float delta) 
 {
+
+    if (hasBeenHit) return;
 
     Vector2 dir = { 0 };
 
@@ -94,5 +105,31 @@ std::unique_ptr<Projectile> Player::Shoot()
     }; 
 
     return std::make_unique<PlayerProjectile>(projRect, Vector2{0, -1}, 800.0f, false);
+
+}
+
+void Player::Die(float delta)
+{
+
+    hasBeenHit = true;
+
+    if (currDeathFrame < numOfFrames - 1)
+    {
+
+        timerForDeathSpriteChange += delta;
+
+        if (timerForDeathSpriteChange >= frameDelay)
+        {
+
+            timerForDeathSpriteChange = 0.0f;
+            currDeathFrame += 1;
+            deathSourceRect.x = currDeathFrame * frameWidth;
+
+        }
+
+        DrawTexturePro(deathSprite, deathSourceRect, rect, Vector2{0, 0}, 0.0f, WHITE);
+
+    }
+    else hasLost = true;
 
 }
