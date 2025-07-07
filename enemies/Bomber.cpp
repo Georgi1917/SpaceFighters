@@ -36,11 +36,12 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
 std::unique_ptr<Projectile> Bomber::Shoot(float delta, Player* player)
 {
 
-    Rectangle projRect;
-    projRect.width = 8;
-    projRect.height = 8;
-    projRect.x = (this->rect.x + this->rect.width / 2) - projRect.width / 2;
-    projRect.y = this->rect.y + this->rect.height + 10; 
+    Rectangle projSourceRect = {0, 0, 16, 32};
+    Rectangle projRect = {
+        (this->rect.x + this->rect.width / 2) - projSourceRect.width / 2,
+        this->rect.y + this->rect.height + 10,
+        projSourceRect.width * 1.5f, projSourceRect.height * 1.5f
+    };
 
     Vector2 dir = Normalize({(player->rect.x + player->rect.width / 2) - projRect.x, player->rect.y - projRect.y});
 

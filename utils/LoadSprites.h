@@ -5,6 +5,7 @@
 extern Texture2D playerProjSprite;
 extern Texture2D basicProjSprite;
 extern Texture2D doubleProjSprite;
+extern Texture2D explosiveProjSprite;
 extern Texture2D playerSprite;
 extern Texture2D playerEngineSprite;
 extern Texture2D bomberSprite;

@@ -15,11 +15,15 @@ class ExplosiveProjectile : public Projectile
 
     private:
 
+        Rectangle destRect;
+
         int timeToExplode;
         float countdown;
         float explosionRadius;
         float explosionSpeed;
         float maxRadius;
+        float rotation;
         Player* player;
+        float GetRotation(float targetAngle, float delta);
 
 };

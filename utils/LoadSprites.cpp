@@ -3,6 +3,7 @@
 Texture2D playerProjSprite;
 Texture2D basicProjSprite;
 Texture2D doubleProjSprite;
+Texture2D explosiveProjSprite;
 Texture2D playerSprite;
 Texture2D playerEngineSprite;
 Texture2D bomberSprite;
@@ -17,6 +18,7 @@ void LoadSprites()
     playerProjSprite = LoadTexture("textures/player_projectiles/player_proj1.png");
     basicProjSprite = LoadTexture("textures/enemy_projectiles/basicProj.png");
     doubleProjSprite = LoadTexture("textures/enemy_projectiles/DoubleProj.png");
+    explosiveProjSprite = LoadTexture("textures/enemy_projectiles/ExplosiveProj.png");
     playerSprite = LoadTexture("textures/player/Player_ship (16 x 16).png");
     playerEngineSprite = LoadTexture("textures/player/Boosters (16 x 16).png");
     bomberSprite = LoadTexture("textures/enemies/Bomber.png");
@@ -33,6 +35,7 @@ void UnloadSprites()
     UnloadTexture(playerProjSprite);
     UnloadTexture(basicProjSprite);
     UnloadTexture(doubleProjSprite);
+    UnloadTexture(explosiveProjSprite);
     UnloadTexture(playerSprite);
     UnloadTexture(playerEngineSprite);
     UnloadTexture(bomberSprite);
