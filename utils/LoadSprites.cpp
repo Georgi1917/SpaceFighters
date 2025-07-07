@@ -4,6 +4,8 @@ Texture2D playerProjSprite;
 Texture2D basicProjSprite;
 Texture2D doubleProjSprite;
 Texture2D explosiveProjSprite;
+Texture2D explosiveSprite;
+
 Texture2D playerSprite;
 Texture2D playerEngineSprite;
 Texture2D bomberSprite;
@@ -12,6 +14,10 @@ Texture2D DogFighterSprite;
 Texture2D HeavyFighterSprite;
 Texture2D HeavyFighterEngineSprite;
 
+Texture2D HeavyFighterDeathSprite;
+Texture2D FirstDeathSprite;
+Texture2D SecondDeathSprite;
+
 void LoadSprites()
 {
 
@@ -19,6 +25,8 @@ void LoadSprites()
     basicProjSprite = LoadTexture("textures/enemy_projectiles/basicProj.png");
     doubleProjSprite = LoadTexture("textures/enemy_projectiles/DoubleProj.png");
     explosiveProjSprite = LoadTexture("textures/enemy_projectiles/ExplosiveProj.png");
+    explosiveSprite = LoadTexture("textures/enemy_projectiles/Explosion.png");
+
     playerSprite = LoadTexture("textures/player/Player_ship (16 x 16).png");
     playerEngineSprite = LoadTexture("textures/player/Boosters (16 x 16).png");
     bomberSprite = LoadTexture("textures/enemies/Bomber.png");
@@ -26,6 +34,10 @@ void LoadSprites()
     DogFighterSprite = LoadTexture("textures/enemies/DogFighter.png");
     HeavyFighterSprite = LoadTexture("textures/enemies/HeavyFighter.png");
     HeavyFighterEngineSprite = LoadTexture("textures/enemies/HeavyFighterEngine.png");
+
+    HeavyFighterDeathSprite = LoadTexture("textures/death_sprites/HeavyFighterDeath.png");
+    FirstDeathSprite = LoadTexture("textures/death_sprites/death1.png");
+    SecondDeathSprite = LoadTexture("textures/death_sprites/death2.png");
 
 }
 
@@ -36,6 +48,8 @@ void UnloadSprites()
     UnloadTexture(basicProjSprite);
     UnloadTexture(doubleProjSprite);
     UnloadTexture(explosiveProjSprite);
+    UnloadTexture(explosiveSprite);
+
     UnloadTexture(playerSprite);
     UnloadTexture(playerEngineSprite);
     UnloadTexture(bomberSprite);
@@ -43,5 +57,9 @@ void UnloadSprites()
     UnloadTexture(DogFighterSprite);
     UnloadTexture(HeavyFighterSprite);
     UnloadTexture(HeavyFighterEngineSprite);
+
+    UnloadTexture(HeavyFighterDeathSprite);
+    UnloadTexture(FirstDeathSprite);
+    UnloadTexture(SecondDeathSprite);
 
 }

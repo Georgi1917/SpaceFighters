@@ -13,8 +13,6 @@ class Enemy
 
     public:
 
-        Texture2D sprite;
-        Rectangle sourceRect;
         Rectangle rect;
         Vector2 velocity;
         Color color;
@@ -33,10 +31,26 @@ class Enemy
         float Length(Vector2 vec) const;
         Vector2 Normalize(Vector2 vec) const;
         int GenerateRandNum();
+
+        void Die(float delta);
         
     protected:
+
+        Texture2D sprite;
+        Rectangle sourceRect;
+
+        Texture2D deathSprite;
+        Rectangle deathSourceRect;
+
+        int numOfFrames;
+        int frameWidth;
+        int currDeathFrame;
+        float timerForDeathSpriteChange;
+
         float timerForSpriteChange;
         float frameDelay;
         int currFrame;
+
+
 
 };

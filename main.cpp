@@ -42,6 +42,8 @@ int main()
     background.width = screenWidth;
     background.height = screenHeight;
 
+    float bgScrollY = 0.0f;
+
     Player player = Player();
 
     Player *p = &player;
@@ -80,9 +82,16 @@ int main()
 
         BeginDrawing();
 
-        DrawTexture(background, 0, 0, WHITE);
-
         float deltaTime = GetFrameTime();
+
+        bgScrollY += 50 * deltaTime;
+
+        if (bgScrollY > background.height) bgScrollY = 0;
+
+        DrawTexture(background, 0, -background.height + (int)bgScrollY, WHITE);
+        DrawTexture(background, 0, (int)bgScrollY, WHITE);
+
+
         player.Move(deltaTime);
 
         if (IsKeyDown(KEY_Z) && player.timerForShooting >= 0.2f) 
@@ -160,11 +169,6 @@ int main()
 
         EndDrawing();
 
-    }
-
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
-    {
-        UnloadTexture((*it)->sprite);
     }
 
     UnloadSprites();

@@ -18,9 +18,16 @@ ExplosiveProjectile::ExplosiveProjectile(Rectangle r, Vector2 dir, float s, bool
     currFrame = 0;
     frameDelay = 0.05f;
 
+    timerForExpSpriteChange = 0.0f;
+    frameExpDelay = 0.1f;
+    currExpFrame = 0;
+
     sprite = explosiveProjSprite;
+    explosionSprite = explosiveSprite;
     sourceRect = {0, 0, 16, 32};
     destRect = { rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width, rect.height };
+    explosionSourceRect = {0, 0, 16, 16};
+    explosionDestRect = { 0 };
 
 }
 
@@ -64,37 +71,34 @@ void ExplosiveProjectile::Update(float delta)
 void ExplosiveProjectile::Explode(float delta)
 {
 
-    if (explosionRadius < maxRadius)
+    if (explosionSourceRect.x < 96)
     {
 
-        DrawCircle(this->rect.x, this->rect.y, explosionRadius, RED);
+        timerForExpSpriteChange += delta;
 
-        if (CheckForCollisionWithPlayer(*player))
+        if (timerForExpSpriteChange >= frameExpDelay)
+        {
+
+            timerForExpSpriteChange = 0.0f;
+            currExpFrame += 1;
+            explosionSourceRect.x = currExpFrame * 16;
+
+        }
+
+        explosionDestRect = {rect.x - (explosionSourceRect.width * 6.0f) / 2, rect.y, explosionSourceRect.width * 6.0f, explosionSourceRect.height * 6.0f};
+        DrawTexturePro(explosionSprite, explosionSourceRect, explosionDestRect, Vector2{0, 0}, 0.0f, WHITE);
+        DrawRectangleLinesEx(explosionDestRect, 1.0f, BLACK);
+
+        if (CheckCollisionRecs(player->rect, explosionDestRect))
         {
 
             player->hasLost = true;
 
-        } 
-
-        explosionRadius += explosionSpeed * delta;
+        }
 
     }
-    else 
-    {
-
-        toBeDeleted = true;
-        explosionRadius = 0;
-        countdown = 0;
-
-    }
+    else toBeDeleted = true;
     
-}
-
-bool ExplosiveProjectile::CheckForCollisionWithPlayer(Player player)
-{
-
-    return CheckCollisionCircleRec(Vector2{this->rect.x, this->rect.y}, explosionRadius, player.rect);
-
 }
 
 float ExplosiveProjectile::GetRotation(float targetAngle, float delta)

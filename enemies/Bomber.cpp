@@ -40,7 +40,7 @@ std::unique_ptr<Projectile> Bomber::Shoot(float delta, Player* player)
     Rectangle projRect = {
         (this->rect.x + this->rect.width / 2) - projSourceRect.width / 2,
         this->rect.y + this->rect.height + 10,
-        projSourceRect.width * 1.5f, projSourceRect.height * 1.5f
+        projSourceRect.width * 1.6f, projSourceRect.height * 1.6f
     };
 
     Vector2 dir = Normalize({(player->rect.x + player->rect.width / 2) - projRect.x, player->rect.y - projRect.y});

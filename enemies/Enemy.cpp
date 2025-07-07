@@ -48,3 +48,19 @@ int Enemy::GenerateRandNum() {
     return dis(gen);
 
 }
+
+void Enemy::Die(float delta)
+{
+
+    timerForDeathSpriteChange += delta;
+    
+    if (timerForDeathSpriteChange >= frameDelay)
+    {
+
+        timerForDeathSpriteChange = 0.0f;
+        currDeathFrame = (currDeathFrame + 1) % numOfFrames;
+        deathSourceRect.x = currDeathFrame * frameWidth;
+
+    }
+
+}

@@ -10,12 +10,14 @@ class ExplosiveProjectile : public Projectile
 
         void Update(float delta) override;
         void Explode(float delta);
-        bool CheckForCollisionWithPlayer(Player player);
         ExplosiveProjectile(Rectangle r, Vector2 dir, float s, bool enemy, Player* p);
 
     private:
 
+        Texture2D explosionSprite;
         Rectangle destRect;
+        Rectangle explosionSourceRect;
+        Rectangle explosionDestRect;
 
         int timeToExplode;
         float countdown;
@@ -24,6 +26,11 @@ class ExplosiveProjectile : public Projectile
         float maxRadius;
         float rotation;
         Player* player;
+
+        float timerForExpSpriteChange;
+        float frameExpDelay;
+        int currExpFrame;
+
         float GetRotation(float targetAngle, float delta);
 
 };
