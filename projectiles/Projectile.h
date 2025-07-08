@@ -28,5 +28,7 @@ class Projectile
         float frameDelay;
         int currFrame;
         float timerForSpriteChange;
+        float Length(Vector2 vec) const;
+        Vector2 Normalize(Vector2 vec) const;
     
 };

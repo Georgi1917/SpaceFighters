@@ -1,5 +1,6 @@
 #include "Projectile.h"
 #include <iostream>
+#include <cmath>
 
 int Projectile::nextId = 1;
 
@@ -30,4 +31,22 @@ bool Projectile::operator==(const Projectile& other) const
 
     return id == other.id;
     
+}
+
+float Projectile::Length(Vector2 vec) const
+{
+
+    return std::sqrt(vec.x * vec.x + vec.y * vec.y);
+
+}
+
+Vector2 Projectile::Normalize(Vector2 vec) const
+{
+
+    float len = Length(vec);
+
+    if (len == 0) return {0, 0};
+
+    return {vec.x / len, vec.y / len};
+
 }

@@ -6,10 +6,12 @@ projectiles/BasicProjectile.o
 projectiles/ExplosiveProjectile.o
 projectiles/DoubleProjectile.o
 projectiles/PlayerProjectile.o
+projectiles/HomingProjectile.o
 enemies/DiveBomber.o
 enemies/Enemy.o
 enemies/DogFighter.o
 enemies/Bomber.o
 enemies/HeavyFighter.o
+enemies/Boss.o
 utils/LoadSprites.o
 .vscode

@@ -8,6 +8,7 @@
 #include "enemies/DogFighter.h"
 #include "enemies/Bomber.h"
 #include "enemies/HeavyFighter.h"
+#include "enemies/Boss.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -75,6 +76,9 @@ int main()
         Vector2{(float)GetScreenWidth() + 10, 200}, std::vector<Vector2>{
             {600, 230}, {590, 280}, {590, 340}, {450, 340}, {320, 500}, {-30, 350}
         }
+    ));
+    enemies.push_back(std::make_unique<Boss>(
+        Vector2{230, -200}, Vector2{230, 150}
     ));
 
     while(!WindowShouldClose() && !player.hasLost) 

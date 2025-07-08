@@ -2,8 +2,8 @@ CXX = g++
 CXXFLAGS = -Iinclude -Wall -std=c++17
 LDFLAGS = -Llib -lraylib -lwinmm -lgdi32 -lopengl32
 
-ADDITIONAL_PROJECTILES = projectiles/Projectile.cpp projectiles/BasicProjectile.cpp projectiles/ExplosiveProjectile.cpp projectiles/DoubleProjectile.cpp projectiles/PlayerProjectile.cpp
-ADDITIONAL_ENEMIES = enemies/DiveBomber.cpp enemies/Enemy.cpp enemies/DogFighter.cpp enemies/Bomber.cpp enemies/HeavyFighter.cpp
+ADDITIONAL_PROJECTILES = projectiles/Projectile.cpp projectiles/BasicProjectile.cpp projectiles/ExplosiveProjectile.cpp projectiles/DoubleProjectile.cpp projectiles/PlayerProjectile.cpp projectiles/HomingProjectile.cpp
+ADDITIONAL_ENEMIES = enemies/DiveBomber.cpp enemies/Enemy.cpp enemies/DogFighter.cpp enemies/Bomber.cpp enemies/HeavyFighter.cpp enemies/Boss.cpp
 UTILS_FUNCS = utils/LoadSprites.cpp
 
 SRC = main.cpp Player.cpp $(ADDITIONAL_PROJECTILES) $(ADDITIONAL_ENEMIES) $(UTILS_FUNCS)

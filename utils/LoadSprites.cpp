@@ -5,6 +5,7 @@ Texture2D basicProjSprite;
 Texture2D doubleProjSprite;
 Texture2D explosiveProjSprite;
 Texture2D explosiveSprite;
+Texture2D HomingProjSprite;
 
 Texture2D playerSprite;
 Texture2D playerEngineSprite;
@@ -13,6 +14,7 @@ Texture2D diveBomberSprite;
 Texture2D DogFighterSprite;
 Texture2D HeavyFighterSprite;
 Texture2D HeavyFighterEngineSprite;
+Texture2D BossSprite;
 
 Texture2D HeavyFighterDeathSprite;
 Texture2D FirstDeathSprite;
@@ -26,6 +28,7 @@ void LoadSprites()
     doubleProjSprite = LoadTexture("textures/enemy_projectiles/DoubleProj.png");
     explosiveProjSprite = LoadTexture("textures/enemy_projectiles/ExplosiveProj.png");
     explosiveSprite = LoadTexture("textures/enemy_projectiles/Explosion.png");
+    HomingProjSprite = LoadTexture("textures/enemy_projectiles/HomingProj.png");
 
     playerSprite = LoadTexture("textures/player/Player_ship (16 x 16).png");
     playerEngineSprite = LoadTexture("textures/player/Boosters (16 x 16).png");
@@ -34,6 +37,7 @@ void LoadSprites()
     DogFighterSprite = LoadTexture("textures/enemies/DogFighter.png");
     HeavyFighterSprite = LoadTexture("textures/enemies/HeavyFighter.png");
     HeavyFighterEngineSprite = LoadTexture("textures/enemies/HeavyFighterEngine.png");
+    BossSprite = LoadTexture("textures/enemies/Boss.png");
 
     HeavyFighterDeathSprite = LoadTexture("textures/death_sprites/HeavyFighterDeath.png");
     FirstDeathSprite = LoadTexture("textures/death_sprites/death1.png");
@@ -49,6 +53,7 @@ void UnloadSprites()
     UnloadTexture(doubleProjSprite);
     UnloadTexture(explosiveProjSprite);
     UnloadTexture(explosiveSprite);
+    UnloadTexture(HomingProjSprite);
 
     UnloadTexture(playerSprite);
     UnloadTexture(playerEngineSprite);
@@ -57,6 +62,7 @@ void UnloadSprites()
     UnloadTexture(DogFighterSprite);
     UnloadTexture(HeavyFighterSprite);
     UnloadTexture(HeavyFighterEngineSprite);
+    UnloadTexture(BossSprite);
 
     UnloadTexture(HeavyFighterDeathSprite);
     UnloadTexture(FirstDeathSprite);
