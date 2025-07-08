@@ -1,6 +1,7 @@
 #include "DoubleProjectile.h"
 
-DoubleProjectile::DoubleProjectile(Rectangle r, Vector2 dir, float s, bool enemy, Rectangle r2, Player* p) : Projectile(r, dir, s, enemy)
+DoubleProjectile::DoubleProjectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg, Rectangle r2, Player* p) 
+: Projectile(r, dir, s, enemy, dmg)
 {
 
     sprite = doubleProjSprite;
@@ -34,7 +35,14 @@ void DoubleProjectile::Update(float delta)
 
     }
 
-    if (CheckForPlayerHit()) player->Die(delta);
+    if (CheckForPlayerHit())
+    {
+
+        player->TakeDamage(damage);
+        if (player->health <= 0) player->hasBeenHit = true;
+        toBeDeleted = true;
+
+    }
 
     DrawTexturePro(sprite, sourceRect, rect, Vector2{0, 0}, 0.0f, WHITE);
     DrawTexturePro(sprite, sourceRect, rect2, Vector2{0, 0}, 0.0f, WHITE);

@@ -1,7 +1,7 @@
 #include "PlayerProjectile.h"
 
-PlayerProjectile::PlayerProjectile(Rectangle r, Vector2 dir, float s, bool enemy) 
-    : Projectile(r, dir, s, enemy)
+PlayerProjectile::PlayerProjectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg) 
+    : Projectile(r, dir, s, enemy, dmg)
     {
 
         sprite = playerProjSprite;

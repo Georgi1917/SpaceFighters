@@ -11,7 +11,7 @@ class DoubleProjectile : public Projectile
         Player* player;
 
         void Update(float delta) override;
-        DoubleProjectile(Rectangle r, Vector2 dir, float s, bool enemy, Rectangle r2, Player* p);
+        DoubleProjectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg, Rectangle r2, Player* p);
         bool CheckForPlayerHit();
 
 };

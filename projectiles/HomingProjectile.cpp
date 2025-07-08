@@ -1,7 +1,7 @@
 #include "HomingProjectile.h"
 
-HomingProjectile::HomingProjectile(Rectangle r, Vector2 dir, float s, bool enemy, Player* p) 
-    : Projectile(r, dir, s, enemy)
+HomingProjectile::HomingProjectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg, Player* p) 
+    : Projectile(r, dir, s, enemy, dmg)
     {
 
         player = p;
@@ -11,13 +11,15 @@ HomingProjectile::HomingProjectile(Rectangle r, Vector2 dir, float s, bool enemy
         timerForSpriteChange = 0.0f;
         currFrame = 0;
         frameDelay = 0.05f;
+        hasBeenPassed = false;
 
     }
 
 void HomingProjectile::Update(float delta)
 {
 
-    direction = Normalize({player->rect.x - rect.x, player->rect.y - rect.y});
+    if (player->rect.y > rect.y && !hasBeenPassed) direction = Normalize({player->rect.x - rect.x, player->rect.y - rect.y});
+    else hasBeenPassed = true;
 
     rect.x += direction.x * speed * delta;
     rect.y += direction.y * speed * delta;

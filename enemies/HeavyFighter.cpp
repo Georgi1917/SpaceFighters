@@ -13,6 +13,7 @@ HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep)
     countdown = 0;
     randNum = GenerateRandNum();
     color = PINK;
+    givenScore = 30;
 
     hasAppeared = false;
     hasReachedMidPoint = false;
@@ -61,7 +62,7 @@ std::unique_ptr<Projectile> HeavyFighter::Shoot(float delta, Player* player)
 
     Vector2 dir = { 0, 1 };
 
-    return std::make_unique<DoubleProjectile>(projRect, dir, 80.0f, true, projRect2, player);
+    return std::make_unique<DoubleProjectile>(projRect, dir, 80.0f, true, damage, projRect2, player);
 
 }
 

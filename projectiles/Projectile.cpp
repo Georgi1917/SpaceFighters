@@ -4,7 +4,7 @@
 
 int Projectile::nextId = 1;
 
-Projectile::Projectile(Rectangle r, Vector2 dir, float s, bool enemy) 
+Projectile::Projectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg) 
 {
 
     id = nextId++;
@@ -13,6 +13,7 @@ Projectile::Projectile(Rectangle r, Vector2 dir, float s, bool enemy)
     speed = s;
     isEnemy = enemy;
     toBeDeleted = false;
+    damage = dmg;
 
 }
 

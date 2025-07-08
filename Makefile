@@ -5,8 +5,9 @@ LDFLAGS = -Llib -lraylib -lwinmm -lgdi32 -lopengl32
 ADDITIONAL_PROJECTILES = projectiles/Projectile.cpp projectiles/BasicProjectile.cpp projectiles/ExplosiveProjectile.cpp projectiles/DoubleProjectile.cpp projectiles/PlayerProjectile.cpp projectiles/HomingProjectile.cpp
 ADDITIONAL_ENEMIES = enemies/DiveBomber.cpp enemies/Enemy.cpp enemies/DogFighter.cpp enemies/Bomber.cpp enemies/HeavyFighter.cpp enemies/Boss.cpp
 UTILS_FUNCS = utils/LoadSprites.cpp
+UI = UI/UIClass.cpp
 
-SRC = main.cpp Player.cpp $(ADDITIONAL_PROJECTILES) $(ADDITIONAL_ENEMIES) $(UTILS_FUNCS)
+SRC = main.cpp Player.cpp $(ADDITIONAL_PROJECTILES) $(ADDITIONAL_ENEMIES) $(UTILS_FUNCS) $(UI)
 OBJ = $(SRC:.cpp=.o)
 
 TARGET = spacefighters.exe

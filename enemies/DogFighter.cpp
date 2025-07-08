@@ -13,6 +13,7 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
     rotation = 0.0f;
     randNum = GenerateRandNum();
     color = RED;
+    givenScore = 20;
 
     setPoints = sp;
     endPoints = ep;
@@ -56,7 +57,7 @@ std::unique_ptr<Projectile> DogFighter::Shoot(float delta, Player* player)
 
     Vector2 dir = Normalize({(player->rect.x + player->rect.width / 2) - projRect.x, player->rect.y - projRect.y});
 
-    return std::make_unique<BasicProjectile>(projRect, dir, 100.0f, true);
+    return std::make_unique<BasicProjectile>(projRect, dir, 100.0f, true, damage);
 
 }
 

@@ -24,6 +24,7 @@ class Enemy
         bool hasAppeared;
         bool hasDied;
         int randNum;
+        int givenScore;
 
         std::unique_ptr<Projectile> virtual Shoot(float delta, Player* player) = 0;
         void virtual Update(float delta) = 0;

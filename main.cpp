@@ -9,6 +9,7 @@
 #include "enemies/Bomber.h"
 #include "enemies/HeavyFighter.h"
 #include "enemies/Boss.h"
+#include "UI/UIClass.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -46,6 +47,7 @@ int main()
     float bgScrollY = 0.0f;
 
     Player player = Player();
+    UIClass ui;
 
     Player *p = &player;
 
@@ -112,7 +114,12 @@ int main()
 
             (*it)->Update(deltaTime);
 
-            if (CheckCollisionRecs((*it)->rect, player.rect)) player.Die(deltaTime);
+            if (CheckCollisionRecs((*it)->rect, player.rect))
+            {
+
+                player.hasBeenHit = true;
+
+            }
 
             if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5) 
             {
@@ -145,6 +152,7 @@ int main()
                 if ((*it)->hasDied) 
                 {
                     
+                    player.score += (*it)->givenScore;
                     it = enemies.erase(it);
                     continue;
 
@@ -169,7 +177,16 @@ int main()
 
             (*proj)->Update(deltaTime);
 
-            if (CheckCollisionRecs((*proj)->rect, player.rect) && (*proj)->isEnemy) player.Die(deltaTime);
+            if (CheckCollisionRecs((*proj)->rect, player.rect) && (*proj)->isEnemy)
+            {
+
+                player.TakeDamage((*proj)->damage);
+                if (player.health <= 0) player.hasBeenHit = true;
+
+                proj = projectiles.erase(proj);
+                continue;
+
+            }
 
             if ((*proj)->CheckOutOfBounds() || (*proj)->toBeDeleted)
             {
@@ -183,12 +200,17 @@ int main()
 
         }
 
+        if (player.hasBeenHit) player.Die(deltaTime);
+
+        ui.VisualizePlayerStats(player);
+
         ClearBackground(LIGHTGRAY);
 
         EndDrawing();
 
     }
 
+    UnloadTexture(background);
     UnloadSprites();
 
     CloseWindow();

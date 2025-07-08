@@ -20,6 +20,8 @@ Texture2D HeavyFighterDeathSprite;
 Texture2D FirstDeathSprite;
 Texture2D SecondDeathSprite;
 
+Texture2D healthSprite;
+
 void LoadSprites()
 {
 
@@ -42,6 +44,8 @@ void LoadSprites()
     HeavyFighterDeathSprite = LoadTexture("textures/death_sprites/HeavyFighterDeath.png");
     FirstDeathSprite = LoadTexture("textures/death_sprites/death1.png");
     SecondDeathSprite = LoadTexture("textures/death_sprites/death2.png");
+
+    healthSprite = LoadTexture("textures/ui-elements/health.png");
 
 }
 
@@ -67,5 +71,7 @@ void UnloadSprites()
     UnloadTexture(HeavyFighterDeathSprite);
     UnloadTexture(FirstDeathSprite);
     UnloadTexture(SecondDeathSprite);
+
+    UnloadTexture(healthSprite);
 
 }

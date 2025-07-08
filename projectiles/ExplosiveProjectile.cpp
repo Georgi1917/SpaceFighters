@@ -2,7 +2,8 @@
 #include <cmath>
 #include <iostream>
 
-ExplosiveProjectile::ExplosiveProjectile(Rectangle r, Vector2 dir, float s, bool enemy, Player* p) : Projectile(r, dir, s, enemy) 
+ExplosiveProjectile::ExplosiveProjectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg, Player* p) 
+    : Projectile(r, dir, s, enemy, dmg) 
 {
 
     player = p;
@@ -71,7 +72,7 @@ void ExplosiveProjectile::Update(float delta)
 void ExplosiveProjectile::Explode(float delta)
 {
 
-    if (explosionSourceRect.x < 96)
+    if (currExpFrame < 5)
     {
 
         timerForExpSpriteChange += delta;
@@ -87,12 +88,12 @@ void ExplosiveProjectile::Explode(float delta)
 
         explosionDestRect = {rect.x - (explosionSourceRect.width * 6.0f) / 2, rect.y, explosionSourceRect.width * 6.0f, explosionSourceRect.height * 6.0f};
         DrawTexturePro(explosionSprite, explosionSourceRect, explosionDestRect, Vector2{0, 0}, 0.0f, WHITE);
-        DrawRectangleLinesEx(explosionDestRect, 1.0f, BLACK);
 
         if (CheckCollisionRecs(player->rect, explosionDestRect))
         {
 
-            player->Die(delta);
+            player->TakeDamage(damage);
+            if (player->health <= 0) player->hasBeenHit = true;
 
         }
 

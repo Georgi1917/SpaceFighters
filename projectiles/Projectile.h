@@ -9,6 +9,7 @@ class Projectile
     public:
         static int nextId;
         int id;
+        int damage;
         Rectangle rect;
         Texture2D sprite;
         Vector2 direction;
@@ -20,7 +21,7 @@ class Projectile
 
     bool CheckOutOfBounds();
     bool operator==(const Projectile &other) const;
-    Projectile(Rectangle r, Vector2 dir, float s, bool enemy);
+    Projectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg);
 
     protected:
         Rectangle sourceRect;

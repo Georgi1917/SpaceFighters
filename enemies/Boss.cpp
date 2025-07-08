@@ -15,6 +15,7 @@ Boss::Boss(Vector2 sp, Vector2 ep)
     speed = 50.0f;
     shootDelayTimer = 0.0f;
     randNum = GenerateRandNum();
+    givenScore = 100;
 
     velocity = { 0 };
 
@@ -77,6 +78,6 @@ std::unique_ptr<Projectile> Boss::Shoot(float delta, Player* player)
 
     Vector2 dir = Normalize({(player->rect.x + player->rect.width / 2) - projRect.x, player->rect.y - projRect.y});
 
-    return std::make_unique<HomingProjectile>(projRect, dir, 100.0f, true, player);
+    return std::make_unique<HomingProjectile>(projRect, dir, 100.0f, true, damage, player);
 
 }

@@ -22,5 +22,7 @@ extern Texture2D HeavyFighterDeathSprite;
 extern Texture2D FirstDeathSprite;
 extern Texture2D SecondDeathSprite;
 
+extern Texture2D healthSprite;
+
 void LoadSprites();
 void UnloadSprites();

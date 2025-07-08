@@ -5,6 +5,6 @@ class BasicProjectile : public Projectile
 {
     public:
         void Update(float delta) override;
-        BasicProjectile(Rectangle r, Vector2 dir, float s, bool enemy);
+        BasicProjectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg);
 
 };

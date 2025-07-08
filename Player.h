@@ -12,17 +12,20 @@ class Player
     public:
         Rectangle rect;
 
-        float health;
+        int health;
         int score;
+
         float damage;
         float speed;
         float timerForShooting;
+
         bool hasLost;
         bool hasBeenHit;
 
         std::unique_ptr<Projectile> Shoot();
         void Move(float delta);
         void Die(float delta);
+        void TakeDamage(int damage);
         Player();
 
     private:

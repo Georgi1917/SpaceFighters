@@ -12,7 +12,7 @@ Player::Player()
     deathSourceRect = {0, 0, 48, 48};
     rect = Rectangle{300, 700, spriteSource.width * 3.4f, spriteSource.height * 3.4f};
 
-    health = 1;
+    health = 5;
     score = 0;
     damage = 1;
     speed = 300.0f;
@@ -104,14 +104,12 @@ std::unique_ptr<Projectile> Player::Shoot()
         sourceRect.width * 3.0f, sourceRect.height * 3.0f
     }; 
 
-    return std::make_unique<PlayerProjectile>(projRect, Vector2{0, -1}, 800.0f, false);
+    return std::make_unique<PlayerProjectile>(projRect, Vector2{0, -1}, 800.0f, false, damage);
 
 }
 
 void Player::Die(float delta)
 {
-
-    hasBeenHit = true;
 
     if (currDeathFrame < numOfFrames - 1)
     {
@@ -131,5 +129,13 @@ void Player::Die(float delta)
 
     }
     else hasLost = true;
+
+}
+
+void Player::TakeDamage(int damage)
+{
+    
+    if ((health - damage) <= 0) health = 0;
+    else health -= damage;
 
 }

@@ -10,7 +10,7 @@ class ExplosiveProjectile : public Projectile
 
         void Update(float delta) override;
         void Explode(float delta);
-        ExplosiveProjectile(Rectangle r, Vector2 dir, float s, bool enemy, Player* p);
+        ExplosiveProjectile(Rectangle r, Vector2 dir, float s, bool enemy, int dmg, Player* p);
 
     private:
 

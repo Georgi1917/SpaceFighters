@@ -12,6 +12,7 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
     shootDelayTimer = 0;
     rotation = 0.0f;
     color = BLUE;
+    givenScore = 50;
 
     hasAppeared = false;
     hasDied = false;
@@ -54,7 +55,7 @@ std::unique_ptr<Projectile> Bomber::Shoot(float delta, Player* player)
 
     Vector2 dir = Normalize({(player->rect.x + player->rect.width / 2) - projRect.x, player->rect.y - projRect.y});
 
-    return std::make_unique<ExplosiveProjectile>(projRect, dir, 100.0f, true, player);
+    return std::make_unique<ExplosiveProjectile>(projRect, dir, 100.0f, true, damage, player);
 
 }
 

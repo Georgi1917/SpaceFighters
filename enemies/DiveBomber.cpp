@@ -13,6 +13,7 @@ DiveBomber::DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp)
     randNum = GenerateRandNum();
     rotation = 0.0f;
     color = PURPLE;
+    givenScore = 20;
 
     shootDelayTimer = 0.0f;
 
@@ -59,7 +60,7 @@ std::unique_ptr<Projectile> DiveBomber::Shoot(float delta, Player* player)
 
     Vector2 dir = Normalize({(player->rect.x + player->rect.width / 2) - projRect.x, player->rect.y - projRect.y});
 
-    return std::make_unique<BasicProjectile>(projRect, dir, 100.0f, true);
+    return std::make_unique<BasicProjectile>(projRect, dir, 100.0f, true, damage);
 
 }
 
