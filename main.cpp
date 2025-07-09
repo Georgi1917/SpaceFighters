@@ -18,6 +18,19 @@
 
 #define PLAYER_SPEED 300.0f
 
+void EmptyProjectilesVector(std::vector<std::unique_ptr<Projectile>> &proj)
+{
+
+    if (!proj.empty())
+    {
+
+        for (auto it = proj.begin(); it != proj.end(); )
+            it = proj.erase(it);
+
+    }
+
+}
+
 int generateRandomNumber() 
 {
 
@@ -36,9 +49,11 @@ int main()
     std::vector<std::unique_ptr<Projectile>> projectiles;
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
+    InitAudioDevice();
     SetTargetFPS(60);
 
     LoadSprites();
+    Music music = LoadMusicStream("music/music-loop.wav");
 
     Texture2D background = LoadTexture("textures/background/background.png");
     background.width = screenWidth;
@@ -52,20 +67,97 @@ int main()
 
     Player *p = &player;
 
-    while(!WindowShouldClose() && !player.hasLost) 
+    PlayMusicStream(music);
+    SetMusicVolume(music, 0.6f);
+
+    while(!WindowShouldClose()) 
     {
 
         BeginDrawing();
+
+        UpdateMusicStream(music);
+
+        if (level.enemies.size() <= 0)
+        {
+
+            level.enemies.push_back(std::make_unique<Boss>(
+                Vector2{100, -150}, Vector2{100, 200}, level.gameTime + 5.0f
+            ));
+            level.enemies.push_back(std::make_unique<Boss>(
+                Vector2{300, -150}, Vector2{300, 200}, level.gameTime + 5.0f
+            ));
+            level.bossesHaveSpawned = true;
+
+        }
 
         float deltaTime = GetFrameTime();
 
         level.gameTime += deltaTime;
         bgScrollY += 50 * deltaTime;
 
+
         if (bgScrollY > background.height) bgScrollY = 0;
 
         DrawTexture(background, 0, -background.height + (int)bgScrollY, WHITE);
         DrawTexture(background, 0, (int)bgScrollY, WHITE);
+
+        if (!level.hasBegun)
+        {
+
+            if (IsKeyPressed(KEY_ENTER)) 
+            {
+
+                level.hasBegun = true;
+                continue;
+
+            }
+            else if (IsKeyPressed(KEY_ESCAPE)) break;
+
+            ui.VisualizeStartMenu();
+            ClearBackground(LIGHTGRAY);
+            EndDrawing();
+            continue;
+
+        }
+
+        if (player.hasWon || player.hasLost)
+        {
+
+            if (IsKeyPressed(KEY_ENTER)) 
+            {
+
+                level.bossesHaveSpawned = false;
+                level.spawnTime = 0.0f;
+                level.gameTime = 0.0f;
+
+                level.EmptyVector();
+                level.PopulateVector();
+                EmptyProjectilesVector(projectiles);
+                PlayMusicStream(music);
+
+                player.hasWon = false;
+                player.hasLost = false;
+                player.hasBeenHit = false;
+
+                player.health = 5;
+                player.SetNewBestScore();
+                player.score = 0;
+
+                ClearBackground(LIGHTGRAY);
+                EndDrawing();
+                continue;
+
+            }
+            
+            else if (IsKeyPressed(KEY_ESCAPE)) break;
+
+            ui.GameOverScreen(player);
+            StopMusicStream(music);
+            ClearBackground(LIGHTGRAY);
+            EndDrawing();
+            continue;
+
+        }
 
         player.Move(deltaTime);
 
@@ -172,6 +264,7 @@ int main()
         }
 
         if (player.hasBeenHit) player.Die(deltaTime);
+        if (level.bossesHaveSpawned && level.enemies.size() <= 0) player.hasWon = true;
 
         ui.VisualizePlayerStats(player);
 
@@ -181,6 +274,7 @@ int main()
 
     }
 
+    CloseAudioDevice();
     UnloadTexture(background);
     UnloadSprites();
 

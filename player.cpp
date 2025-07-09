@@ -14,6 +14,7 @@ Player::Player()
 
     health = 5;
     score = 0;
+    bestScore = 0;
     damage = 1;
     speed = 300.0f;
 
@@ -30,6 +31,7 @@ Player::Player()
 
     hasLost = false;
     hasBeenHit = false;
+    hasWon = false;
 
 }
 
@@ -136,5 +138,12 @@ void Player::TakeDamage(int damage)
     
     if ((health - damage) <= 0) health = 0;
     else health -= damage;
+
+}
+
+void Player::SetNewBestScore()
+{
+
+    if (score > bestScore) bestScore = score;
 
 }

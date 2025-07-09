@@ -8,8 +8,9 @@ class UIClass
 
     public:
         UIClass();
-        void StartMenu();
+        void GameOverScreen(Player player);
         void VisualizePlayerStats(Player player);
+        void VisualizeStartMenu();
 
     private:
         Texture2D spHealth;

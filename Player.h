@@ -14,18 +14,21 @@ class Player
 
         int health;
         int score;
+        int bestScore;
 
         float damage;
         float speed;
         float timerForShooting;
 
         bool hasLost;
+        bool hasWon;
         bool hasBeenHit;
 
         std::unique_ptr<Projectile> Shoot();
         void Move(float delta);
         void Die(float delta);
         void TakeDamage(int damage);
+        void SetNewBestScore();
         Player();
 
     private:

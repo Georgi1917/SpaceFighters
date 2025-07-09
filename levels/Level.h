@@ -16,10 +16,16 @@ class Level
         float gameTime;
         float spawnTime;
         std::vector<std::unique_ptr<Enemy>> enemies;
+        bool bossesHaveSpawned;
+        bool hasBegun;
+
+        void PopulateVector();
+        void EmptyVector();
         Level();
 
     private:
-        void PopulateVector();
+        int heavyIndex;
+        int heavyLimit;
         void AddWave(int count);
 
 };

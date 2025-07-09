@@ -11,8 +11,8 @@ Boss::Boss(Vector2 sp, Vector2 ep, float st)
     endPoint = ep;
     spawnTime = st;
 
-    health = 10;
-    damage = 2;
+    health = 30;
+    damage = 4;
     speed = 50.0f;
     shootDelayTimer = 0.0f;
     randNum = GenerateRandNum();

@@ -6,17 +6,34 @@ Level::Level()
 
     gameTime = 0.0f;
     spawnTime = 0.0f;
+    heavyIndex = 0;
+    heavyLimit = 4;
+    bossesHaveSpawned = false;
+    hasBegun = false;
     PopulateVector();
+
+}
+
+void Level::EmptyVector()
+{
+
+    if (!enemies.empty())
+    {
+
+        for (auto it = enemies.begin(); it != enemies.end(); )
+            it = enemies.erase(it);
+
+    }
 
 }
 
 void Level::PopulateVector()
 {
 
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 15; i++)
     {
 
-        int count = GetRandomValue(8, 15);
+        int count = GetRandomValue(10, 15);
 
         AddWave(count);
 
@@ -29,8 +46,9 @@ void Level::AddWave(int count)
     for (int i = 0; i < count; ++i) 
     {
 
-        int typePool[] = {0, 0, 1, 1, 2, 2, 3, 4};
+        int typePool[] = {0, 0, 1, 1, 2, 2, 3};
         int type = typePool[GetRandomValue(0, sizeof(typePool) / sizeof(int) - 1)];
+        heavyIndex++;
 
         switch (type) 
         {
@@ -129,18 +147,17 @@ void Level::AddWave(int count)
                     Vector2 mid = { start.x, start.y - (float)GetRandomValue(450, 750) };
                     Vector2 end = { start.x, -150 };
 
-                    enemies.push_back(std::make_unique<HeavyFighter>(start, mid, end, spawnTime));
+                    if (heavyIndex >= heavyLimit)
+                    {
+
+                        enemies.push_back(std::make_unique<HeavyFighter>(start, mid, end, spawnTime));
+                        heavyIndex = 0;
+
+                    }
 
                 }
 
                 break;
-
-            // case 4: // Boss (from top only)
-            //     {
-            //         Vector2 start = { 325, -120 };
-            //         enemies.push_back(std::make_unique<Boss>(start, spawnTime));
-            //     }
-            //     break;
 
         }
 
@@ -148,6 +165,6 @@ void Level::AddWave(int count)
 
     }
 
-    spawnTime += GetRandomValue(8, 13);
+    spawnTime += GetRandomValue(8, 10);
 
 }
