@@ -9,7 +9,7 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep, float st)
 
     health = 1;
     damage = 1;
-    speed = 50.0f;
+    speed = 90.0f;
     rotation = 0.0f;
     randNum = GenerateRandNum();
     color = RED;
@@ -70,7 +70,7 @@ void DogFighter::Update(float delta)
     float tolerance = 1.0f;
 
     if (fabs(this->rect.x - this->currPoint.x) < tolerance &&
-        fabs(this->rect.y - this->currPoint.y < tolerance))
+        fabs(this->rect.y - this->currPoint.y) < tolerance)
     {
 
         currPointIndex++;

@@ -14,7 +14,12 @@ class Level
 
     public:
         float gameTime;
+        float spawnTime;
         std::vector<std::unique_ptr<Enemy>> enemies;
         Level();
+
+    private:
+        void PopulateVector();
+        void AddWave(int count);
 
 };

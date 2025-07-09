@@ -34,7 +34,6 @@ int main()
     int screenHeight = 900;
 
     std::vector<std::unique_ptr<Projectile>> projectiles;
-    // std::vector<std::unique_ptr<Enemy>> enemies;
 
     InitWindow(screenWidth, screenHeight, "Space Fighters");
     SetTargetFPS(60);
@@ -52,38 +51,6 @@ int main()
     Level level = Level();
 
     Player *p = &player;
-
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{600, -10}, Vector2{320, 500}, Vector2{100, -10}, 5
-    // ));
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{600, -70}, Vector2{320, 500}, Vector2{100, -10}, 5
-    // ));
-    // enemies.push_back(std::make_unique<DiveBomber>(
-    //     Vector2{600, -130}, Vector2{320, 500}, Vector2{100, -10}, 5
-    // ));
-    // enemies.push_back(std::make_unique<Bomber>(
-    //     Vector2{-70, 320}, Vector2{(float) GetScreenWidth() + 20, 320}, 20
-    // ));
-    // enemies.push_back(std::make_unique<Bomber>(
-    //     Vector2{700, 200}, Vector2{-10, 500}, 20
-    // ));
-    // enemies.push_back(std::make_unique<HeavyFighter>(
-    //     Vector2{230, 910}, Vector2{230, 400}, Vector2{230, -10}, 30
-    // ));
-    // enemies.push_back(std::make_unique<DogFighter>(
-    //     Vector2{-50, 600}, std::vector<Vector2>{
-    //         {50, 580}, {120, 500}, {300, 450}, {400, 400}, {500, 300}, {700, 200}
-    //     }, 10
-    // ));
-    // enemies.push_back(std::make_unique<DogFighter>(
-    //     Vector2{(float)GetScreenWidth() + 10, 200}, std::vector<Vector2>{
-    //         {600, 230}, {590, 280}, {590, 340}, {450, 340}, {320, 500}, {-30, 350}
-    //     }, 10
-    // ));
-    // enemies.push_back(std::make_unique<Boss>(
-    //     Vector2{230, -300}, Vector2{230, 150}, 40
-    // ));
 
     while(!WindowShouldClose() && !player.hasLost) 
     {
@@ -111,8 +78,6 @@ int main()
         }
         else if (IsKeyDown(KEY_Z) && player.timerForShooting < 0.2f) player.timerForShooting += deltaTime;
         else player.timerForShooting = 0;
-
-        std::cout << level.enemies.size() << "\n";
         
         for (auto it = level.enemies.begin(); it != level.enemies.end();) 
         {
@@ -127,7 +92,7 @@ int main()
 
             }
 
-            if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5 && (*it)->spawnTime >= level.gameTime) 
+            if (generateRandomNumber() == (*it)->randNum && (*it)->shootDelayTimer >= 5 && (*it)->spawnTime <= level.gameTime) 
             {
 
                 projectiles.push_back((*it)->Shoot(deltaTime, p));
