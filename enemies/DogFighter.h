@@ -13,7 +13,7 @@ class DogFighter : public Enemy
         Vector2 currPoint;
         std::vector<Vector2> endPoints;
 
-        DogFighter(Vector2 sp, std::vector<Vector2> ep);
+        DogFighter(Vector2 sp, std::vector<Vector2> ep, float st);
 
         std::unique_ptr<Projectile> Shoot(float delta, Player* player) override;
         void Update(float delta) override;

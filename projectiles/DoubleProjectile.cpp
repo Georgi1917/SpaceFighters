@@ -47,9 +47,6 @@ void DoubleProjectile::Update(float delta)
     DrawTexturePro(sprite, sourceRect, rect, Vector2{0, 0}, 0.0f, WHITE);
     DrawTexturePro(sprite, sourceRect, rect2, Vector2{0, 0}, 0.0f, WHITE);
 
-    DrawRectangleLinesEx(rect, 1.0f, RED);
-    DrawRectangleLinesEx(rect2, 1.0f, RED);
-
 }
 
 bool DoubleProjectile::CheckForPlayerHit()

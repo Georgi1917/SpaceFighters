@@ -2,13 +2,14 @@
 #include <iostream>
 #include <cmath>
 
-Boss::Boss(Vector2 sp, Vector2 ep)
+Boss::Boss(Vector2 sp, Vector2 ep, float st)
 {
 
     srand((unsigned) time(NULL));
 
     spawnPoint = sp;
     endPoint = ep;
+    spawnTime = st;
 
     health = 10;
     damage = 2;
@@ -62,7 +63,6 @@ void Boss::Update(float delta)
     }
 
     DrawTexturePro(sprite, sourceRect, rect, Vector2{0, 0}, 0.0f, WHITE);
-    DrawRectangleLinesEx(rect, 1.0f, RED);
 
 }
 

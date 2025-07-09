@@ -25,6 +25,7 @@ class Enemy
         bool hasDied;
         int randNum;
         int givenScore;
+        float spawnTime;
 
         std::unique_ptr<Projectile> virtual Shoot(float delta, Player* player) = 0;
         void virtual Update(float delta) = 0;

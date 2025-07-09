@@ -11,7 +11,7 @@ class Bomber : public Enemy {
         std::unique_ptr<Projectile> Shoot(float delta, Player* player) override;
         void Update(float delta) override;
 
-        Bomber(Vector2 sp, Vector2 ep);
+        Bomber(Vector2 sp, Vector2 ep, float st);
 
     private:
         float rotation;

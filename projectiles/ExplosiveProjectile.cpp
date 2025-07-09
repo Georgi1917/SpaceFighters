@@ -61,8 +61,6 @@ void ExplosiveProjectile::Update(float delta)
         }
 
         DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2, destRect.height / 2}, targetAngle, WHITE);
-        DrawRectangleLinesEx(rect, 1.0f, RED);
-        DrawRectangleLinesEx(destRect, 1.0f, BLACK);
 
     }
     else Explode(delta);

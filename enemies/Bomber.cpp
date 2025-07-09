@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-Bomber::Bomber(Vector2 sp, Vector2 ep) {
+Bomber::Bomber(Vector2 sp, Vector2 ep, float st) {
 
     srand((unsigned) time(NULL));
 
@@ -21,6 +21,7 @@ Bomber::Bomber(Vector2 sp, Vector2 ep) {
 
     spawnPoint = sp;
     endPoint = ep;
+    spawnTime = st;
 
     velocity = { 0 };
 
@@ -92,8 +93,6 @@ void Bomber::Update(float delta)
     }
 
     DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2, destRect.height / 2}, rotation, WHITE);
-    DrawRectangleLinesEx(rect, 1.0f, color);
-    DrawRectangleLinesEx(destRect, 1.0f, BLACK);
 
 }
 

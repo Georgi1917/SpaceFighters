@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-DiveBomber::DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp) 
+DiveBomber::DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp, float st) 
 {
 
     srand((unsigned) time(NULL));
@@ -20,6 +20,7 @@ DiveBomber::DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp)
     finalPoint = fp;
     midPoint = mp;
     spawnPoint = swp;
+    spawnTime = st;
 
     currPoint = spawnPoint;
     nextPoint = midPoint;
@@ -104,8 +105,6 @@ void DiveBomber::Update(float delta)
     }
 
     DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2.0f, destRect.height / 2.0f}, rotation, WHITE);
-    DrawRectangleLinesEx(rect, 1.0f, color);
-    DrawRectangleLinesEx(destRect, 1.0f, BLACK);
 
 }
 

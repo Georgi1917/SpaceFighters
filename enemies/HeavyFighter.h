@@ -10,7 +10,7 @@ class HeavyFighter : public Enemy
         std::unique_ptr<Projectile> Shoot(float delta, Player* player) override;
         void Update(float delta) override;
 
-        HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep);
+        HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep, float st);
 
     private:
 

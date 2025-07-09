@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
+DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep, float st)
 {
 
     srand((unsigned) time(NULL));
@@ -17,6 +17,7 @@ DogFighter::DogFighter(Vector2 sp, std::vector<Vector2> ep)
 
     setPoints = sp;
     endPoints = ep;
+    spawnTime = st;
 
     currPointIndex = 0;
     currPoint = endPoints[currPointIndex];
@@ -102,8 +103,6 @@ void DogFighter::Update(float delta)
     }
 
     DrawTexturePro(sprite, sourceRect, destRect, Vector2{destRect.width / 2, destRect.height / 2}, rotation, WHITE);
-    DrawRectangleLinesEx(rect, 1.0f, RED);
-    DrawRectangleLinesEx(destRect, 1.0f, BLACK);
 
 }
 

@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep)
+HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep, float st)
 {
 
     health = 6;
@@ -24,6 +24,7 @@ HeavyFighter::HeavyFighter(Vector2 sp, Vector2 mp, Vector2 ep)
     spawnPoint = sp;
     midPoint = mp;
     endPoint = ep;
+    spawnTime = st;
 
     currPoint = spawnPoint;
     nextPoint = midPoint;
@@ -100,6 +101,7 @@ void HeavyFighter::Update(float delta)
                   engineSource.width * 1.8f, engineSource.height * 1.8f};
 
     timerForSpriteChange += delta;
+
     if (timerForSpriteChange >= frameDelay)
     {
 
@@ -111,8 +113,5 @@ void HeavyFighter::Update(float delta)
 
     DrawTexturePro(sprite, sourceRect, rect, Vector2{0, 0}, 0.0f, WHITE);
     DrawTexturePro(engineSprite, engineSource, engineDest, Vector2{0, 0}, 0.0f, WHITE);
-
-    DrawRectangleLinesEx(rect, 1.0f, color);
-    DrawRectangleLinesEx(Rectangle{rect.x, rect.y + rect.height, engineSource.width, engineSource.height}, 1.0f, BLACK);
 
 }

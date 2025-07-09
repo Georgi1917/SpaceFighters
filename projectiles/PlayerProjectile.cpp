@@ -16,6 +16,5 @@ void PlayerProjectile::Update(float delta)
     rect.y += direction.y * speed * delta;
 
     DrawTexturePro(sprite, sourceRect, rect, Vector2{0, 0}, 0.0f, WHITE);
-    DrawRectangleLinesEx(rect, 1.0f, RED);
 
 }

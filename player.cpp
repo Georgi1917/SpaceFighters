@@ -85,7 +85,6 @@ void Player::Move(float delta)
 
     }
 
-    DrawRectangleLinesEx(rect, 1.0f, GREEN);
     DrawTexturePro(sprite, spriteSource, rect, Vector2{0, 0}, 0.0f, WHITE);
     DrawTexturePro(engineSprite, engineSource, 
                    Rectangle{(rect.x + rect.width / 2.0f) - engineSource.width - 6, 

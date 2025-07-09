@@ -8,7 +8,7 @@ class DiveBomber : public Enemy
 
     public:
 
-        DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp);
+        DiveBomber(Vector2 swp, Vector2 mp, Vector2 fp, float st);
         std::unique_ptr<Projectile> Shoot(float delta, Player* player) override;
         void Update(float delta) override;
 

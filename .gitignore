@@ -15,4 +15,5 @@ enemies/HeavyFighter.o
 enemies/Boss.o
 utils/LoadSprites.o
 UI/UIClass.o
+levels/Level.o
 .vscode
