@@ -5,3 +5,4 @@ Uses textures and spritesheets from itch.io
 
 To build the the project simply open a CLI in the directory and write make or mingw32-make (Platform dependent) in the terminal
 
+![alt-text](https://github.com/Georgi1917/SpaceFighters/blob/main/spacefighters-example.jpg?raw=true)
